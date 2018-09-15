@@ -1,4 +1,4 @@
-package br.com.bookstore.entity;
+package br.com.bookstore.domain.entity;
 
 import java.util.List;
 
