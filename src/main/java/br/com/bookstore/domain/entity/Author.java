@@ -1,18 +1,31 @@
 package br.com.bookstore.domain.entity;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "authors")
 public class Author {
 
+    @Id
+    @Column(name = "author_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
     private String firstName;
 
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
     public Author() {
+    }
+
+    public Author(Integer id, String name, String firstName) {
+        this.id = id;
+        this.name = name;
+        this.firstName = firstName;
     }
 
     public Author(Integer id, String name, String firstName, List<Book> books) {

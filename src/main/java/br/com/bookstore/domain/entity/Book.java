@@ -1,17 +1,29 @@
 package br.com.bookstore.domain.entity;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book {
 
+    @Id
     private Long isbn;
 
     private String title;
 
     private Float price;
 
+    @ManyToOne
+    @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
+    @ManyToMany
+    @JoinTable(
+            name = "books_authors",
+            joinColumns = {@JoinColumn(name = "isbn")},
+            inverseJoinColumns = {@JoinColumn(name = "author_id")}
+    )
     private List<Author> authors;
 
     public Book() {

@@ -1,0 +1,39 @@
+JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_162" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:34:p, par t {par l {comp lblName:::p::p, comp txtName:::p:300:p}, par l:t {comp lblSurname:::p::p, comp txtSurname:::p:300:p}, seq t {comp btnCancel:::p::p, space s:::p, comp btnSave:::p:80:p}}, space ::64:x}}"
+			"$verticalGroup": "par l {seq l {space :p:17:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:18:p, comp lblSurname:::p::p, space :::p, comp txtSurname:::p::p, space :p:45:p, par b {comp btnSave::b:p::p, comp btnCancel::b:p::p}, space ::49:x}}"
+		} ) {
+			name: "this"
+			"title": "Autor"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lblName"
+				"text": "Nome"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txtName"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "txtSurname"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lblSurname"
+				"text": "Sobrenome"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnCancel"
+				"text": "Cancelar"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSave"
+				"text": "Salvar"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 275 )
+		} )
+	}
+}

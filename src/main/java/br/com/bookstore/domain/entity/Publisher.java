@@ -1,12 +1,23 @@
 package br.com.bookstore.domain.entity;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "publishers")
 public class Publisher {
 
+    @Id
+    @Column(name = "publisher_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
     private String url;
+
+    @OneToMany(mappedBy = "publisher")
+    private List<Book> books;
 
     public Publisher() {
     }
@@ -15,6 +26,13 @@ public class Publisher {
         this.id = id;
         this.name = name;
         this.url = url;
+    }
+
+    public Publisher(Integer id, String name, String url, List<Book> books) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.books = books;
     }
 
     public Integer getId() {
@@ -41,6 +59,14 @@ public class Publisher {
         this.url = url;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,7 +76,8 @@ public class Publisher {
 
         if (!id.equals(publisher.id)) return false;
         if (!name.equals(publisher.name)) return false;
-        return url != null ? url.equals(publisher.url) : publisher.url == null;
+        if (url != null ? !url.equals(publisher.url) : publisher.url != null) return false;
+        return books != null ? books.equals(publisher.books) : publisher.books == null;
     }
 
     @Override
@@ -58,6 +85,7 @@ public class Publisher {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (books != null ? books.hashCode() : 0);
         return result;
     }
 
@@ -67,6 +95,7 @@ public class Publisher {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", books=" + books +
                 '}';
     }
 }
