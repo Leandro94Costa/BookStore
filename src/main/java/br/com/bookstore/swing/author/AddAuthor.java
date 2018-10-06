@@ -4,16 +4,39 @@
 
 package br.com.bookstore.swing.author;
 
+import br.com.bookstore.domain.entity.Author;
+import br.com.bookstore.service.AuthorService;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
  * @author unknown
  */
-public class add extends JFrame {
-    public add() {
+public class AddAuthor extends JFrame {
+
+    public AddAuthor() {
         initComponents();
+    }
+
+    private void btnCancelActionPerformed(ActionEvent e) {
+        dispose();
+    }
+
+    private void btnSaveActionPerformed(ActionEvent e) {
+        if (!"".equals(txtName.getText()) && !"".equals(txtSurname.getText())) {
+            Author author = new Author(txtName.getText(), txtSurname.getText());
+            AuthorService service = new AuthorService();
+            try {
+                service.save(author);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        } else {
+
+        }
     }
 
     private void initComponents() {
@@ -38,45 +61,46 @@ public class add extends JFrame {
 
         //---- btnCancel ----
         btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(e -> btnCancelActionPerformed(e));
 
         //---- btnSave ----
         btnSave.setText("Salvar");
+        btnSave.addActionListener(e -> btnSaveActionPerformed(e));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(34, 34, 34)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGap(35, 35, 35)
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(lblSurname)
+                        .addComponent(lblName)
+                        .addComponent(txtName, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
                         .addGroup(contentPaneLayout.createParallelGroup()
-                            .addComponent(lblName)
-                            .addComponent(txtName, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createParallelGroup()
-                            .addComponent(lblSurname)
-                            .addComponent(txtSurname, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(btnCancel)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(64, Short.MAX_VALUE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                .addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancel))
+                            .addComponent(txtSurname, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(53, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
+                    .addGap(30, 30, 30)
                     .addComponent(lblName)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(lblSurname)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(0, 0, 0)
                     .addComponent(txtSurname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(45, 45, 45)
+                    .addGap(33, 33, 33)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSave)
-                        .addComponent(btnCancel))
-                    .addContainerGap(49, Short.MAX_VALUE))
+                        .addComponent(btnCancel)
+                        .addComponent(btnSave))
+                    .addContainerGap(54, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());

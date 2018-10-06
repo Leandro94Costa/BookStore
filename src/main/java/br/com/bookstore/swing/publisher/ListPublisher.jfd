@@ -1,0 +1,40 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panelPublisher::l:::x}"
+			"$verticalGroup": "par l {comp panelPublisher::l:::x}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp scrollPanelPublisher::::786:x, seq {space :0:468:x, comp buttonAdd:::p:90:p, space s:::p, comp buttonEdit:::p:90:p, space s:::p, comp buttonRemove:::p:90:p, space :p:12:p}}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp scrollPanelPublisher:::p::p, space u:::p, par b {comp buttonRemove::b:p::p, comp buttonEdit::b:p::p, comp buttonAdd::b:p::p}, space ::9:x}}"
+			} ) {
+				name: "panelPublisher"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPanelPublisher"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tablePublisher"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonRemove"
+					"text": "Remover"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonEdit"
+					"text": "Editar"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonAdd"
+					"text": "Adicionar"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 800, 500 )
+		} )
+	}
+}

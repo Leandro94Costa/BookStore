@@ -22,14 +22,12 @@ public class Publisher {
     public Publisher() {
     }
 
-    public Publisher(Integer id, String name, String url) {
-        this.id = id;
+    public Publisher(String name, String url) {
         this.name = name;
         this.url = url;
     }
 
-    public Publisher(Integer id, String name, String url, List<Book> books) {
-        this.id = id;
+    public Publisher(String name, String url, List<Book> books) {
         this.name = name;
         this.url = url;
         this.books = books;

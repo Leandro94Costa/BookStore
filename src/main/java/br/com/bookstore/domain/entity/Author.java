@@ -14,6 +14,7 @@ public class Author {
 
     private String name;
 
+    @Column(name = "fname")
     private String firstName;
 
     @ManyToMany(mappedBy = "authors")
@@ -22,14 +23,12 @@ public class Author {
     public Author() {
     }
 
-    public Author(Integer id, String name, String firstName) {
-        this.id = id;
+    public Author(String name, String firstName) {
         this.name = name;
         this.firstName = firstName;
     }
 
-    public Author(Integer id, String name, String firstName, List<Book> books) {
-        this.id = id;
+    public Author(String name, String firstName, List<Book> books) {
         this.name = name;
         this.firstName = firstName;
         this.books = books;

@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_162" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:34:p, par t {par l {comp lblName:::p::p, comp txtName:::p:300:p}, par l:t {comp lblSurname:::p::p, comp txtSurname:::p:300:p}, seq t {comp btnCancel:::p::p, space s:::p, comp btnSave:::p:80:p}}, space ::64:x}}"
-			"$verticalGroup": "par l {seq l {space :p:17:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:18:p, comp lblSurname:::p::p, space :::p, comp txtSurname:::p::p, space :p:45:p, par b {comp btnSave::b:p::p, comp btnCancel::b:p::p}, space ::49:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:35:p, par l {comp lblSurname:::p::p, comp lblName:::p::p, comp txtName::l:p:310:p, par l:l {seq t {comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}, comp txtSurname::l:p:310:p}}, space ::53:x}}"
+			"$verticalGroup": "par l {seq l {space :p:30:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:18:p, comp lblSurname:::p::p, space :0:0:p, comp txtSurname:::p::p, space :p:33:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space ::54:x}}"
 		} ) {
 			name: "this"
 			"title": "Autor"
@@ -26,10 +26,12 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCancel"
 				"text": "Cancelar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnCancelActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSave"
 				"text": "Salvar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSaveActionPerformed", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

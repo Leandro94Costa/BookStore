@@ -27,7 +27,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <!-- Atualiza o banco de dados, criando as tabelas caso necessário -->
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <!--<property name="hibernate.hbm2ddl.auto" value="validate"/>-->
         </properties>
     </persistence-unit>
 </persistence>

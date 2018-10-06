@@ -11,8 +11,8 @@ import javax.swing.GroupLayout;
 /**
  * @author Leandro
  */
-public class add extends JFrame {
-    public add() {
+public class AddBook extends JFrame {
+    public AddBook() {
         initComponents();
     }
 

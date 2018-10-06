@@ -1,0 +1,46 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panelMain::l:::x}"
+			"$verticalGroup": "par l {comp panelMain::l:::x}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPane::::786:x, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp scrollPane::::434:x, space :::p}}"
+			} ) {
+				name: "panelMain"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tableMain"
+					} )
+				} )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar"
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "menuItemAuthor"
+					"text": "Autores"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemAuthorActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "menuItemBook"
+					"text": "Livros"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemBookActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "menuItemPublisher"
+					"text": "Editoras"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemPublisherActionPerformed", true ) )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 800, 500 )
+		} )
+	}
+}
