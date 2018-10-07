@@ -8,13 +8,14 @@ new FormModel {
 			"$verticalGroup": "par l {comp panelMain::l:::x}"
 		} ) {
 			name: "this"
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowOpened", "thisWindowOpened", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPane::::786:x, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp scrollPane::::434:x, space :::p}}"
+				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPanelMain::::786:x, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp scrollPanelMain::::434:x, space :::p}}"
 			} ) {
 				name: "panelMain"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane"
+					name: "scrollPanelMain"
 					add( new FormComponent( "javax.swing.JTable" ) {
 						name: "tableMain"
 					} )
@@ -28,14 +29,15 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemAuthorActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JMenuItem" ) {
-					name: "menuItemBook"
-					"text": "Livros"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemBookActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JMenuItem" ) {
 					name: "menuItemPublisher"
 					"text": "Editoras"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemPublisherActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JMenuItem" ) {
+					name: "menuItemBook"
+					"text": "Adicionar Livro"
+					"font": new java.awt.Font( "Segoe UI", 1, 12 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItemBookActionPerformed", true ) )
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {

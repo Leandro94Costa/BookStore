@@ -1,20 +1,22 @@
-JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_162" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:46:p, par t {seq {comp btnCancel:::p::p, space s:::p, comp btnSave:::p:80:p}, par l:::p {comp lblAuthor:::p::p, comp lblISBN::l:p::p, comp txtISBN::l:::x, comp lblTitle::l:p::p, comp txtTitle::l:::x, comp lblPrice::l:p::p, comp lblPublisher::l:p::p, comp cbxPublisher::l:::x, comp cbxAuthor::l:p:300:p, comp txtPrice::l:p:125:p}}, space ::52:x}}"
-			"$verticalGroup": "par l {seq l {space :p:20:p, comp lblISBN:::p::p, space :6:6:p, comp txtISBN:::p::p, space s:::p, comp lblTitle:::p::p, space :6:6:p, comp txtTitle:::p::p, space s:::p, comp lblPrice:::p::p, space :::p, comp txtPrice:::p::p, space s:::p, comp lblPublisher:::p::p, space :::p, comp cbxPublisher:::p::p, space s:::p, comp lblAuthor:::p::p, space :::p, comp cbxAuthor:::p::p, space :p:36:p, par b {comp btnSave::b:p::p, comp btnCancel::b:p::p}, space ::38:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:46:p, par t:::p {seq t {comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}, comp lblAuthor::l:p::p, comp lblISBN::l:p::p, comp txtISBN::l:::x, comp lblTitle::l:p::p, comp txtTitle::l:::x, comp lblPrice::l:p::p, comp lblPublisher::l:p::p, comp cbxPublisher::l:::x, comp cbxAuthor::l:p:300:p, comp txtPrice::l:p:125:p}, space ::52:x}}"
+			"$verticalGroup": "par l {seq l {space :p:20:p, comp lblISBN:::p::p, space :6:6:p, comp txtISBN:::p::p, space s:::p, comp lblTitle:::p::p, space :6:6:p, comp txtTitle:::p::p, space s:::p, comp lblPrice:::p::p, space :::p, comp txtPrice:::p::p, space s:::p, comp lblPublisher:::p::p, space :::p, comp cbxPublisher:::p::p, space s:::p, comp lblAuthor:::p::p, space :::p, comp cbxAuthor:::p::p, space :p:36:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space ::38:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSave"
 				"text": "Salvar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSaveActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCancel"
 				"text": "Cancelar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnCancelActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "txtTitle"

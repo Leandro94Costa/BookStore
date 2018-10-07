@@ -28,4 +28,8 @@ public class AuthorService {
     public void delete(Long id) throws Exception {
         dao.delete(id);
     }
+
+    public List<Author> getAuthorsByBook(Long id) throws Exception {
+        return dao.getAuthorsByBook(id);
+    }
 }

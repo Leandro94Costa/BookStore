@@ -4,19 +4,29 @@
 
 package br.com.bookstore.swing;
 
+import br.com.bookstore.domain.entity.Book;
+import br.com.bookstore.service.BookService;
 import br.com.bookstore.swing.author.ListAuthor;
-import br.com.bookstore.swing.book.ListBook;
+import br.com.bookstore.swing.book.AddBook;
 import br.com.bookstore.swing.publisher.ListPublisher;
+import br.com.bookstore.swing.util.ButtonColumn;
+import br.com.bookstore.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * @author Leandro
  */
 public class Main extends JFrame {
+
+    private List<Long> bookIds = new ArrayList<>();
 
     public Main() {
         initComponents();
@@ -40,9 +50,9 @@ public class Main extends JFrame {
     }
 
     private void menuItemBookActionPerformed(ActionEvent e) {
-        ListBook listBook = new ListBook();
-        listBook.setLocationRelativeTo(null);
-        listBook.setVisible(true);
+        AddBook addBook = new AddBook();
+        addBook.setLocationRelativeTo(null);
+        addBook.setVisible(true);
     }
 
     private void menuItemPublisherActionPerformed(ActionEvent e) {
@@ -51,18 +61,92 @@ public class Main extends JFrame {
         listPublisher.setVisible(true);
     }
 
+    private void thisWindowOpened(WindowEvent e) {
+        getScrollPane();
+    }
+
+    private JScrollPane getScrollPane() {
+        scrollPanelMain.setViewportView(getTableMain());
+        return scrollPanelMain;
+    }
+
+    private JTable getTableMain() {
+        BookService bookService = new BookService();
+        String[] header = {"ISBN", "Título", "Preço", "Autores", "Editora", "", ""};
+        try {
+            String[][] books = bookService.getAll(bookIds);
+            TableModel tableModelMain = new DefaultTableModel(books, header);
+            tableMain = new JTable();
+            tableMain.setModel(tableModelMain);
+
+            Action actionEdit = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = Integer.parseInt(e.getActionCommand());
+                    try {
+                        Book book = bookService.getById(bookIds.get(row));
+                        editBook(book);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        MessageUtil.addMessage(Main.this, e1.getMessage());
+                    }
+                }
+            };
+
+            Action actionDelete = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int response = JOptionPane.showConfirmDialog(Main.this, "Deseja remover o registro?");
+                    if (response == 0) {
+                        JTable table = (JTable) e.getSource();
+                        int row = Integer.parseInt(e.getActionCommand());
+                        ((DefaultTableModel) table.getModel()).removeRow(row);
+                        try {
+                            bookService.delete(bookIds.get(row));
+                            MessageUtil.addMessage(Main.this, "Registro removido com sucesso!");
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                            MessageUtil.addMessage(Main.this, e1.getMessage());
+                        }
+                    }
+                }
+            };
+
+            ButtonColumn buttonColumnEdit = new ButtonColumn(tableMain, actionEdit, 5);
+            ButtonColumn buttonColumnRemove = new ButtonColumn(tableMain, actionDelete, 6);
+            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
+            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageUtil.addMessage(Main.this, e.getMessage());
+        }
+        return tableMain;
+    }
+
+    private void editBook(Book book) {
+        AddBook addBook = new AddBook(book.getIsbn().toString(), book.getTitle().toString(), book.getPrice().toString());
+        addBook.setLocationRelativeTo(null);
+        addBook.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Leandro
         menuBar = new JMenuBar();
         menuItemAuthor = new JMenuItem();
-        menuItemBook = new JMenuItem();
         menuItemPublisher = new JMenuItem();
+        menuItemBook = new JMenuItem();
         panelMain = new JPanel();
-        scrollPane = new JScrollPane();
+        scrollPanelMain = new JScrollPane();
         tableMain = new JTable();
 
         //======== this ========
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                thisWindowOpened(e);
+            }
+        });
         Container contentPane = getContentPane();
 
         //======== menuBar ========
@@ -73,15 +157,16 @@ public class Main extends JFrame {
             menuItemAuthor.addActionListener(e -> menuItemAuthorActionPerformed(e));
             menuBar.add(menuItemAuthor);
 
-            //---- menuItemBook ----
-            menuItemBook.setText("Livros");
-            menuItemBook.addActionListener(e -> menuItemBookActionPerformed(e));
-            menuBar.add(menuItemBook);
-
             //---- menuItemPublisher ----
             menuItemPublisher.setText("Editoras");
             menuItemPublisher.addActionListener(e -> menuItemPublisherActionPerformed(e));
             menuBar.add(menuItemPublisher);
+
+            //---- menuItemBook ----
+            menuItemBook.setText("Adicionar Livro");
+            menuItemBook.setFont(new Font("Segoe UI", Font.BOLD, 12));
+            menuItemBook.addActionListener(e -> menuItemBookActionPerformed(e));
+            menuBar.add(menuItemBook);
         }
         setJMenuBar(menuBar);
 
@@ -89,16 +174,10 @@ public class Main extends JFrame {
         {
 
             // JFormDesigner evaluation mark
-            panelMain.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panelMain.getBorder())); panelMain.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
-
-            //======== scrollPane ========
+            //======== scrollPanelMain ========
             {
-                scrollPane.setViewportView(tableMain);
+                scrollPanelMain.setViewportView(tableMain);
             }
 
             GroupLayout panelMainLayout = new GroupLayout(panelMain);
@@ -107,14 +186,14 @@ public class Main extends JFrame {
                 panelMainLayout.createParallelGroup()
                     .addGroup(panelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                         .addContainerGap())
             );
             panelMainLayout.setVerticalGroup(
                 panelMainLayout.createParallelGroup()
                     .addGroup(panelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -138,10 +217,10 @@ public class Main extends JFrame {
     // Generated using JFormDesigner Evaluation license - Leandro
     private JMenuBar menuBar;
     private JMenuItem menuItemAuthor;
-    private JMenuItem menuItemBook;
     private JMenuItem menuItemPublisher;
+    private JMenuItem menuItemBook;
     private JPanel panelMain;
-    private JScrollPane scrollPane;
+    private JScrollPane scrollPanelMain;
     private JTable tableMain;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

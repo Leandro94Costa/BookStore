@@ -41,6 +41,23 @@ public class AuthorDAO implements GenericDAO<Author> {
         return author;
     }
 
+    public List<Author> getAuthorsByBook(Long id) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        List<Author> authors;
+
+        try {
+            authors = entityManager.createQuery("select a from Book b inner join b.authors a where b.id = :bookId", Author.class)
+                    .setParameter("bookId", id)
+                    .getResultList();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+
+        return authors;
+    }
+
     @Override
     public Long save(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
