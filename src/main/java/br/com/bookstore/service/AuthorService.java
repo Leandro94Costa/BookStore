@@ -9,11 +9,23 @@ public class AuthorService {
 
     AuthorDAO dao = new AuthorDAO();
 
-    public List<Author> getAll() throws Exception {
-        return dao.getAll();
+    public String[][] getAll(List<Integer> authorIds) throws Exception {
+        int numColumns = 4;
+        String[][] authors;
+        List<Author> authorList = dao.getAll();
+        authors = new String[authorList.size()][numColumns];
+        for (int i = 0; i < authorList.size(); i++) {
+            Author author = authorList.get(i);
+            authorIds.add(author.getId());
+            authors[i][0] = author.getFirstName();
+            authors[i][1] = author.getName();
+            authors[i][2] = "Editar";
+            authors[i][3] = "Remover";
+        }
+        return authors;
     }
 
-    public Author getById(Long id) throws Exception {
+    public Author getById(Integer id) throws Exception {
         return dao.getById(id);
     }
 
@@ -25,7 +37,7 @@ public class AuthorService {
         dao.update(author);
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) throws Exception {
         dao.delete(id);
     }
 

@@ -21,6 +21,13 @@ public class AddAuthor extends JFrame {
         initComponents();
     }
 
+    public AddAuthor(String id, String name, String surname) {
+        initComponents();
+        txtId.setText(id);
+        txtName.setText(name);
+        txtSurname.setText(surname);
+    }
+
     private void btnCancelActionPerformed(ActionEvent e) {
         dispose();
     }
@@ -48,6 +55,7 @@ public class AddAuthor extends JFrame {
         lblSurname = new JLabel();
         btnCancel = new JButton();
         btnSave = new JButton();
+        txtId = new JLabel();
 
         //======== this ========
         setTitle("Autor");
@@ -67,6 +75,10 @@ public class AddAuthor extends JFrame {
         btnSave.setText("Salvar");
         btnSave.addActionListener(e -> btnSaveActionPerformed(e));
 
+        //---- txtId ----
+        txtId.setText("text");
+        txtId.setVisible(false);
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -74,6 +86,7 @@ public class AddAuthor extends JFrame {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(35, 35, 35)
                     .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(txtId)
                         .addComponent(lblSurname)
                         .addComponent(lblName)
                         .addComponent(txtName, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
@@ -100,7 +113,9 @@ public class AddAuthor extends JFrame {
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCancel)
                         .addComponent(btnSave))
-                    .addContainerGap(54, Short.MAX_VALUE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtId)
+                    .addContainerGap(52, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -115,5 +130,6 @@ public class AddAuthor extends JFrame {
     private JLabel lblSurname;
     private JButton btnCancel;
     private JButton btnSave;
+    private JLabel txtId;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

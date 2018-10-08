@@ -1,16 +1,17 @@
-JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp panelAuthor::l:::x}"
+			"$horizontalGroup": "par l {seq l {comp panelAuthor:::p::p, space :0:0:x}}"
 			"$verticalGroup": "par l {comp panelAuthor::l:::x}"
 		} ) {
 			name: "this"
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowOpened", "thisWindowOpened", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {comp scrollPanelAuthor::::786:x, seq {space :0:468:x, comp buttonAdd:::p:90:p, space s:::p, comp buttonEdit:::p:90:p, space s:::p, comp buttonRemove:::p:90:p, space :p:12:p}}, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp scrollPanelAuthor:::p::p, space u:::p, par b {comp buttonRemove::b:::x, comp buttonEdit::b:p::p, comp buttonAdd::b:p::p}, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp buttonAdd:::p:100:p, comp scrollPanelAuthor:::p:787:p}, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :::p, comp buttonAdd:::p:40:p, space :::p, comp scrollPanelAuthor::::410:x, space :::p}}"
 			} ) {
 				name: "panelAuthor"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -20,17 +21,9 @@ new FormModel {
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonRemove"
-					"text": "Remover"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonEdit"
-					"text": "Editar"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonAdd"
 					"text": "Adicionar"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\Leandro\\Documents\\Java\\BookStore\\src\\main\\java\\br\\com\\bookstore\\swing\\util\\icons\\Add-User-32.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", true ) )
 				} )
 			} )

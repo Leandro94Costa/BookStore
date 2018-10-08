@@ -4,15 +4,27 @@
 
 package br.com.bookstore.swing.author;
 
+import br.com.bookstore.domain.entity.Author;
+import br.com.bookstore.service.AuthorService;
+import br.com.bookstore.swing.util.ButtonColumn;
+import br.com.bookstore.util.MessageUtil;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * @author Leandro
  */
 public class ListAuthor extends JFrame {
+
+    List<Integer> authorIds = new ArrayList<Integer>();
+
     public ListAuthor() {
         initComponents();
     }
@@ -29,28 +41,100 @@ public class ListAuthor extends JFrame {
         addAuthor.setVisible(true);
     }
 
+    private void thisWindowOpened(WindowEvent e) {
+        getScrollPanelAuthor();
+    }
+
+    private JScrollPane getScrollPanelAuthor() {
+        scrollPanelAuthor.setViewportView(getTableAuthor());
+        return scrollPanelAuthor;
+    }
+
+    private JTable getTableAuthor() {
+        AuthorService authorService = new AuthorService();
+        String[] header = {"Nome", "Sobrenome", "", ""};
+        try {
+            String[][] authors = authorService.getAll(authorIds);
+            TableModel tableModelAuthor = new DefaultTableModel(authors, header);
+            tableAuthor = new JTable();
+            tableAuthor.setModel(tableModelAuthor);
+
+            Action actionEdit = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = Integer.parseInt(e.getActionCommand());
+                    try {
+                        Author author = authorService.getById(authorIds.get(row));
+                        editAuthor(author);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
+                    }
+                }
+            };
+
+            Action actionRemove = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int response = JOptionPane.showConfirmDialog(ListAuthor.this, "Deseja remover o registro?");
+                    if (response == 0) {
+                        JTable table = (JTable) e.getSource();
+                        int row = Integer.parseInt(e.getActionCommand());
+                        ((DefaultTableModel) table.getModel()).removeRow(row);
+                        try {
+                            authorService.delete(authorIds.get(row));
+                            MessageUtil.addMessage(ListAuthor.this, "Autor removido com sucesso!");
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                            MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
+                        }
+                    }
+                }
+            };
+
+            ButtonColumn buttonColumnEdit = new ButtonColumn(tableAuthor, actionEdit, 2);
+            ButtonColumn buttonColumnRemove = new ButtonColumn(tableAuthor, actionEdit, 3);
+            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
+            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageUtil.addMessage(ListAuthor.this, e.getMessage());
+        }
+        return tableAuthor;
+    }
+
+    private void editAuthor(Author author) {
+        AddAuthor addAuthor = new AddAuthor(String.valueOf(author.getId()), author.getFirstName(), author.getName());
+        addAuthor.setLocationRelativeTo(null);
+        addAuthor.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Leandro
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
-        buttonRemove = new JButton();
-        buttonEdit = new JButton();
         buttonAdd = new JButton();
 
         //======== this ========
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                thisWindowOpened(e);
+            }
+        });
         Container contentPane = getContentPane();
 
         //======== panelAuthor ========
         {
 
             // JFormDesigner evaluation mark
-//            panelAuthor.setBorder(new javax.swing.border.CompoundBorder(
-//                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-//                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-//                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-//                    java.awt.Color.red), panelAuthor.getBorder())); panelAuthor.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+            panelAuthor.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panelAuthor.getBorder())); panelAuthor.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
 
             //======== scrollPanelAuthor ========
@@ -58,15 +142,9 @@ public class ListAuthor extends JFrame {
                 scrollPanelAuthor.setViewportView(tableAuthor);
             }
 
-            //---- buttonRemove ----
-            buttonRemove.setText("Remover");
-
-            //---- buttonEdit ----
-            buttonEdit.setText("Editar");
-            buttonEdit.addActionListener(e -> buttonEditActionPerformed(e));
-
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
+            buttonAdd.setIcon(new ImageIcon("C:\\Users\\Leandro\\Documents\\Java\\BookStore\\src\\main\\java\\br\\com\\bookstore\\swing\\util\\icons\\Add-User-32.png"));
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
 
             GroupLayout panelAuthorLayout = new GroupLayout(panelAuthor);
@@ -76,27 +154,17 @@ public class ListAuthor extends JFrame {
                     .addGroup(panelAuthorLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelAuthorLayout.createParallelGroup()
-                            .addComponent(scrollPanelAuthor, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-                            .addGroup(panelAuthorLayout.createSequentialGroup()
-                                .addGap(0, 468, Short.MAX_VALUE)
-                                .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonEdit, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonRemove, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))
-                        .addContainerGap())
+                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scrollPanelAuthor, GroupLayout.PREFERRED_SIZE, 787, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             panelAuthorLayout.setVerticalGroup(
                 panelAuthorLayout.createParallelGroup()
-                    .addGroup(panelAuthorLayout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panelAuthorLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPanelAuthor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelAuthorLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonRemove, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonEdit)
-                            .addComponent(buttonAdd))
+                        .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPanelAuthor, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -105,7 +173,9 @@ public class ListAuthor extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(panelAuthor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addComponent(panelAuthor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -121,8 +191,6 @@ public class ListAuthor extends JFrame {
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;
-    private JButton buttonRemove;
-    private JButton buttonEdit;
     private JButton buttonAdd;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

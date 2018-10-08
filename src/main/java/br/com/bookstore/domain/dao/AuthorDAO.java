@@ -26,7 +26,7 @@ public class AuthorDAO implements GenericDAO<Author> {
     }
 
     @Override
-    public Author getById(Long id) throws Exception {
+    public Author getById(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Author author;
 
@@ -94,7 +94,7 @@ public class AuthorDAO implements GenericDAO<Author> {
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
 
         try {

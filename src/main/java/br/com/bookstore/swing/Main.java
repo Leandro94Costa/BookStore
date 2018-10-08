@@ -34,7 +34,7 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-            //@Override
+            @Override
             public void run() {
                 Main main = new Main();
                 main.setLocationRelativeTo(null);
