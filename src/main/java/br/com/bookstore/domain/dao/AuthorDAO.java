@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class AuthorDAO implements GenericDAO<Author> {
+public class AuthorDAO implements GenericDAO<Author, Integer> {
 
     @Override
     public List<Author> getAll() throws Exception {
@@ -59,13 +59,13 @@ public class AuthorDAO implements GenericDAO<Author> {
     }
 
     @Override
-    public Long save(Author author) throws Exception {
+    public Integer save(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-        Long id;
+        Integer id;
 
         try {
             //entityManager.getTransaction().begin();
-            id = (Long) entityManager.unwrap(Session.class).save(author);
+            id = (Integer) entityManager.unwrap(Session.class).save(author);
             //entityManager.getTransaction().commit();
         } catch (Exception e) {
             //entityManager.getTransaction().rollback();

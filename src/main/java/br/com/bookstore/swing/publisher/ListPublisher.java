@@ -5,6 +5,7 @@
 package br.com.bookstore.swing.publisher;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -16,15 +17,22 @@ public class ListPublisher extends JFrame {
         initComponents();
     }
 
+    private void buttonRefreshActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void buttonAddActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Leandro
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
-        buttonRemove = new JButton();
-        buttonEdit = new JButton();
         buttonAdd = new JButton();
+        buttonRefresh = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -33,11 +41,11 @@ public class ListPublisher extends JFrame {
         {
 
             // JFormDesigner evaluation mark
-//            panelPublisher.setBorder(new javax.swing.border.CompoundBorder(
-//                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-//                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-//                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-//                    java.awt.Color.red), panelPublisher.getBorder())); panelPublisher.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+            panelPublisher.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panelPublisher.getBorder())); panelPublisher.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
 
             //======== scrollPanelPublisher ========
@@ -45,14 +53,17 @@ public class ListPublisher extends JFrame {
                 scrollPanelPublisher.setViewportView(tablePublisher);
             }
 
-            //---- buttonRemove ----
-            buttonRemove.setText("Remover");
-
-            //---- buttonEdit ----
-            buttonEdit.setText("Editar");
-
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
+            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Library32.png"));
+            buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
+
+            //---- buttonRefresh ----
+            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.addActionListener(e -> {
+			buttonRefreshActionPerformed(e);
+			buttonRefreshActionPerformed(e);
+		});
 
             GroupLayout panelPublisherLayout = new GroupLayout(panelPublisher);
             panelPublisher.setLayout(panelPublisherLayout);
@@ -63,26 +74,21 @@ public class ListPublisher extends JFrame {
                         .addGroup(panelPublisherLayout.createParallelGroup()
                             .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelPublisherLayout.createSequentialGroup()
-                                .addGap(0, 468, Short.MAX_VALUE)
-                                .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonEdit, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonRemove, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))
+                                .addComponent(buttonAdd)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
+                                .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
             panelPublisherLayout.setVerticalGroup(
                 panelPublisherLayout.createParallelGroup()
                     .addGroup(panelPublisherLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPanelPublisher, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelPublisherLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonRemove)
-                            .addComponent(buttonEdit)
-                            .addComponent(buttonAdd))
-                        .addContainerGap(9, Short.MAX_VALUE))
+                        .addGroup(panelPublisherLayout.createParallelGroup()
+                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonRefresh, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                        .addContainerGap())
             );
         }
 
@@ -106,8 +112,7 @@ public class ListPublisher extends JFrame {
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;
-    private JButton buttonRemove;
-    private JButton buttonEdit;
     private JButton buttonAdd;
+    private JButton buttonRefresh;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

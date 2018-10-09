@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class PublisherDAO implements GenericDAO<Publisher> {
+public class PublisherDAO implements GenericDAO<Publisher, Integer> {
 
     @Override
     public List<Publisher> getAll() throws Exception {
@@ -26,7 +26,7 @@ public class PublisherDAO implements GenericDAO<Publisher> {
     }
 
     @Override
-    public Publisher getById(Long id) throws Exception {
+    public Publisher getById(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Publisher publisher;
 
@@ -42,13 +42,13 @@ public class PublisherDAO implements GenericDAO<Publisher> {
     }
 
     @Override
-    public Long save(Publisher publisher) throws Exception {
+    public Integer save(Publisher publisher) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-        Long id;
+        Integer id;
 
         try {
             //entityManager.getTransaction().begin();
-            id = (Long) entityManager.unwrap(Session.class).save(publisher);
+            id = (Integer) entityManager.unwrap(Session.class).save(publisher);
             //entityManager.getTransaction().commit();
         } catch (Exception e) {
             //entityManager.getTransaction().rollback();
@@ -77,7 +77,7 @@ public class PublisherDAO implements GenericDAO<Publisher> {
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
 
         try {

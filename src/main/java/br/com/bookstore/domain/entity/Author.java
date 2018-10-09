@@ -12,10 +12,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-
     @Column(name = "fname")
     private String firstName;
+
+    private String name;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
@@ -23,14 +23,15 @@ public class Author {
     public Author() {
     }
 
-    public Author(String name, String firstName) {
-        this.name = name;
+    public Author(Integer id, String firstName, String name) {
+        this.id = id;
         this.firstName = firstName;
+        this.name = name;
     }
 
-    public Author(String name, String firstName, List<Book> books) {
-        this.name = name;
+    public Author(String firstName, String name, List<Book> books) {
         this.firstName = firstName;
+        this.name = name;
         this.books = books;
     }
 

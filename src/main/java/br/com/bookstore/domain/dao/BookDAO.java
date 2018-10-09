@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BookDAO implements GenericDAO<Book> {
+public class BookDAO implements GenericDAO<Book, Long> {
 
     @Override
     public List<Book> getAll() throws Exception {

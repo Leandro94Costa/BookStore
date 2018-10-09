@@ -49,7 +49,7 @@ public class Main extends JFrame {
         listAuthor.setVisible(true);
     }
 
-    private void menuItemBookActionPerformed(ActionEvent e) {
+    private void buttonAddActionPerformed(ActionEvent e) {
         AddBook addBook = new AddBook();
         addBook.setLocationRelativeTo(null);
         addBook.setVisible(true);
@@ -59,6 +59,10 @@ public class Main extends JFrame {
         ListPublisher listPublisher = new ListPublisher();
         listPublisher.setLocationRelativeTo(null);
         listPublisher.setVisible(true);
+    }
+
+    private void buttonRefreshActionPerformed(ActionEvent e) {
+        getScrollPane();
     }
 
     private void thisWindowOpened(WindowEvent e) {
@@ -129,16 +133,21 @@ public class Main extends JFrame {
         addBook.setVisible(true);
     }
 
+    private void menuItemBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Leandro
         menuBar = new JMenuBar();
         menuItemAuthor = new JMenuItem();
         menuItemPublisher = new JMenuItem();
-        menuItemBook = new JMenuItem();
         panelMain = new JPanel();
         scrollPanelMain = new JScrollPane();
         tableMain = new JTable();
+        buttonAdd = new JButton();
+        buttonRefresh = new JButton();
 
         //======== this ========
         addWindowListener(new WindowAdapter() {
@@ -161,12 +170,6 @@ public class Main extends JFrame {
             menuItemPublisher.setText("Editoras");
             menuItemPublisher.addActionListener(e -> menuItemPublisherActionPerformed(e));
             menuBar.add(menuItemPublisher);
-
-            //---- menuItemBook ----
-            menuItemBook.setText("Adicionar Livro");
-            menuItemBook.setFont(new Font("Segoe UI", Font.BOLD, 12));
-            menuItemBook.addActionListener(e -> menuItemBookActionPerformed(e));
-            menuBar.add(menuItemBook);
         }
         setJMenuBar(menuBar);
 
@@ -174,26 +177,53 @@ public class Main extends JFrame {
         {
 
             // JFormDesigner evaluation mark
+            panelMain.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panelMain.getBorder())); panelMain.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
 
             //======== scrollPanelMain ========
             {
                 scrollPanelMain.setViewportView(tableMain);
             }
 
+            //---- buttonAdd ----
+            buttonAdd.setText("Adicionar");
+            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Books32.png"));
+            buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
+
+            //---- buttonRefresh ----
+            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.addActionListener(e -> {
+			buttonRefreshActionPerformed(e);
+			buttonRefreshActionPerformed(e);
+		});
+
             GroupLayout panelMainLayout = new GroupLayout(panelMain);
             panelMain.setLayout(panelMainLayout);
             panelMainLayout.setHorizontalGroup(
                 panelMainLayout.createParallelGroup()
-                    .addGroup(panelMainLayout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                        .addGroup(panelMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                            .addGroup(panelMainLayout.createSequentialGroup()
+                                .addComponent(buttonAdd)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
+                                .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
             panelMainLayout.setVerticalGroup(
                 panelMainLayout.createParallelGroup()
-                    .addGroup(panelMainLayout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panelMainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                        .addGroup(panelMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buttonAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonRefresh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -218,9 +248,10 @@ public class Main extends JFrame {
     private JMenuBar menuBar;
     private JMenuItem menuItemAuthor;
     private JMenuItem menuItemPublisher;
-    private JMenuItem menuItemBook;
     private JPanel panelMain;
     private JScrollPane scrollPanelMain;
     private JTable tableMain;
+    private JButton buttonAdd;
+    private JButton buttonRefresh;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

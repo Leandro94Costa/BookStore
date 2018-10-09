@@ -9,8 +9,8 @@ new FormModel {
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {comp scrollPanelPublisher::::786:x, seq {space :0:468:x, comp buttonAdd:::p:90:p, space s:::p, comp buttonEdit:::p:90:p, space s:::p, comp buttonRemove:::p:90:p, space :p:12:p}}, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp scrollPanelPublisher:::p::p, space u:::p, par b {comp buttonRemove::b:p::p, comp buttonEdit::b:p::p, comp buttonAdd::b:p::p}, space ::9:x}}"
+				"$horizontalGroup": "par l {seq l {space :::p, par l {comp scrollPanelPublisher::::786:x, seq {comp buttonAdd:::p::p, space ::599:x, comp buttonRefresh:::p::p}}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {comp buttonAdd:::p:40:p, comp buttonRefresh:::p:40:p}, space :::p, comp scrollPanelPublisher::::410:x, space :::p}}"
 			} ) {
 				name: "panelPublisher"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -20,16 +20,16 @@ new FormModel {
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonRemove"
-					"text": "Remover"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonEdit"
-					"text": "Editar"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonAdd"
 					"text": "Adicionar"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Library32.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonRefresh"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

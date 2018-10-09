@@ -30,11 +30,11 @@ public class AuthorService {
     }
 
     public void save(Author author) throws Exception {
-        dao.save(author);
-    }
-
-    public void update(Author author) throws Exception {
-        dao.update(author);
+        if (author.getId() == null) {
+            dao.save(author);
+        } else {
+            dao.update(author);
+        }
     }
 
     public void delete(Integer id) throws Exception {

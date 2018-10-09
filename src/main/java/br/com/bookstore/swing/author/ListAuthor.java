@@ -41,6 +41,10 @@ public class ListAuthor extends JFrame {
         addAuthor.setVisible(true);
     }
 
+    private void buttonRefreshActionPerformed(ActionEvent e) {
+        getScrollPanelAuthor();
+    }
+
     private void thisWindowOpened(WindowEvent e) {
         getScrollPanelAuthor();
     }
@@ -93,7 +97,7 @@ public class ListAuthor extends JFrame {
             };
 
             ButtonColumn buttonColumnEdit = new ButtonColumn(tableAuthor, actionEdit, 2);
-            ButtonColumn buttonColumnRemove = new ButtonColumn(tableAuthor, actionEdit, 3);
+            ButtonColumn buttonColumnRemove = new ButtonColumn(tableAuthor, actionRemove, 3);
             buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
             buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
         } catch (Exception e) {
@@ -116,6 +120,7 @@ public class ListAuthor extends JFrame {
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
         buttonAdd = new JButton();
+        buttonRefresh = new JButton();
 
         //======== this ========
         addWindowListener(new WindowAdapter() {
@@ -144,8 +149,12 @@ public class ListAuthor extends JFrame {
 
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
-            buttonAdd.setIcon(new ImageIcon("C:\\Users\\Leandro\\Documents\\Java\\BookStore\\src\\main\\java\\br\\com\\bookstore\\swing\\util\\icons\\Add-User-32.png"));
+            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\AddUser32.png"));
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
+
+            //---- buttonRefresh ----
+            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.addActionListener(e -> buttonRefreshActionPerformed(e));
 
             GroupLayout panelAuthorLayout = new GroupLayout(panelAuthor);
             panelAuthor.setLayout(panelAuthorLayout);
@@ -153,16 +162,21 @@ public class ListAuthor extends JFrame {
                 panelAuthorLayout.createParallelGroup()
                     .addGroup(panelAuthorLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panelAuthorLayout.createParallelGroup()
-                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scrollPanelAuthor, GroupLayout.PREFERRED_SIZE, 787, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelAuthorLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scrollPanelAuthor, GroupLayout.PREFERRED_SIZE, 787, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelAuthorLayout.createSequentialGroup()
+                                .addComponent(buttonAdd)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonRefresh)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             panelAuthorLayout.setVerticalGroup(
                 panelAuthorLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panelAuthorLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelAuthorLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonRefresh, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPanelAuthor, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                         .addContainerGap())
@@ -179,7 +193,9 @@ public class ListAuthor extends JFrame {
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(panelAuthor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelAuthor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -192,5 +208,6 @@ public class ListAuthor extends JFrame {
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;
     private JButton buttonAdd;
+    private JButton buttonRefresh;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

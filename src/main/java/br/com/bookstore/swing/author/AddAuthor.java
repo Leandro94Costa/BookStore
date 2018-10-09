@@ -6,6 +6,7 @@ package br.com.bookstore.swing.author;
 
 import br.com.bookstore.domain.entity.Author;
 import br.com.bookstore.service.AuthorService;
+import br.com.bookstore.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -34,15 +35,25 @@ public class AddAuthor extends JFrame {
 
     private void btnSaveActionPerformed(ActionEvent e) {
         if (!"".equals(txtName.getText()) && !"".equals(txtSurname.getText())) {
-            Author author = new Author(txtName.getText(), txtSurname.getText());
+            Integer id = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
+            Author author = new Author(id, txtName.getText(), txtSurname.getText());
             AuthorService service = new AuthorService();
             try {
                 service.save(author);
+                MessageUtil.addMessage(AddAuthor.this, "Autor salvo com sucesso");
+                dispose();
             } catch (Exception e1) {
                 e1.printStackTrace();
+                MessageUtil.addMessage(AddAuthor.this, e1.getMessage());
             }
         } else {
-
+            if (!"".equals(txtSurname.getText())) {
+                MessageUtil.addMessage(AddAuthor.this, "Campo NOME obrigatório");
+            } else if (!"".equals(txtName.getText())) {
+                MessageUtil.addMessage(AddAuthor.this, "Campo SOBRENOME obrigatório");
+            } else {
+                MessageUtil.addMessage(AddAuthor.this, "Campos NOME e SOBRENOME obrigatórios");
+            }
         }
     }
 
@@ -76,7 +87,6 @@ public class AddAuthor extends JFrame {
         btnSave.addActionListener(e -> btnSaveActionPerformed(e));
 
         //---- txtId ----
-        txtId.setText("text");
         txtId.setVisible(false);
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
@@ -115,7 +125,7 @@ public class AddAuthor extends JFrame {
                         .addComponent(btnSave))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtId)
-                    .addContainerGap(52, Short.MAX_VALUE))
+                    .addContainerGap(54, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());

@@ -13,7 +13,7 @@ public class PublisherService {
         return dao.getAll();
     }
 
-    public Publisher getById(Long id) throws Exception {
+    public Publisher getById(Integer id) throws Exception {
         return dao.getById(id);
     }
 
@@ -25,7 +25,7 @@ public class PublisherService {
         dao.update(publisher);
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) throws Exception {
         dao.delete(id);
     }
 }
