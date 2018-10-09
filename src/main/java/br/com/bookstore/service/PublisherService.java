@@ -9,8 +9,20 @@ public class PublisherService {
 
     PublisherDAO dao = new PublisherDAO();
 
-    public List<Publisher> getAll() throws Exception {
-        return dao.getAll();
+    public String[][] getAll(List<Integer> publisherIds) throws Exception {
+        int numColumns = 4;
+        String[][] publishers;
+        List<Publisher> publisherList = dao.getAll();
+        publishers = new String[publisherList.size()][numColumns];
+        for (int i = 0; i < publisherList.size(); i++) {
+            Publisher publisher = publisherList.get(i);
+            publisherIds.add(publisher.getId());
+            publishers[i][0] = publisher.getName();
+            publishers[i][1] = publisher.getUrl();
+            publishers[i][2] = "Editar";
+            publishers[i][3] = "Remover";
+        }
+        return publishers;
     }
 
     public Publisher getById(Integer id) throws Exception {
@@ -18,11 +30,11 @@ public class PublisherService {
     }
 
     public void save(Publisher publisher) throws Exception {
-        dao.save(publisher);
-    }
-
-    public void update(Publisher publisher) throws Exception {
-        dao.update(publisher);
+        if (publisher.getId() == null) {
+            dao.save(publisher);
+        } else {
+            dao.update(publisher);
+        }
     }
 
     public void delete(Integer id) throws Exception {

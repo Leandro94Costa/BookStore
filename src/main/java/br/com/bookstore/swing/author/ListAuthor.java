@@ -35,12 +35,6 @@ public class ListAuthor extends JFrame {
         addAuthor.setVisible(true);
     }
 
-    private void buttonEditActionPerformed(ActionEvent e) {
-        AddAuthor addAuthor = new AddAuthor();
-        addAuthor.setLocationRelativeTo(null);
-        addAuthor.setVisible(true);
-    }
-
     private void buttonRefreshActionPerformed(ActionEvent e) {
         getScrollPanelAuthor();
     }
@@ -115,7 +109,7 @@ public class ListAuthor extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
@@ -203,7 +197,7 @@ public class ListAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;

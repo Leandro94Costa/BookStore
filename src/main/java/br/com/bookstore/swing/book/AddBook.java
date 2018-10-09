@@ -6,6 +6,7 @@ package br.com.bookstore.swing.book;
 
 import br.com.bookstore.domain.entity.Book;
 import br.com.bookstore.service.BookService;
+import br.com.bookstore.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -40,6 +41,7 @@ public class AddBook extends JFrame {
                 bookService.save(book);
             } catch (Exception e1) {
                 e1.printStackTrace();
+                MessageUtil.addMessage(AddBook.this, e1.getMessage());
             }
         } else {
 

@@ -22,7 +22,8 @@ public class Publisher {
     public Publisher() {
     }
 
-    public Publisher(String name, String url) {
+    public Publisher(Integer id, String name, String url) {
+        this.id = id;
         this.name = name;
         this.url = url;
     }

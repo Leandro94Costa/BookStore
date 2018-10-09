@@ -4,30 +4,112 @@
 
 package br.com.bookstore.swing.publisher;
 
+import br.com.bookstore.domain.entity.Publisher;
+import br.com.bookstore.service.PublisherService;
+import br.com.bookstore.swing.util.ButtonColumn;
+import br.com.bookstore.util.MessageUtil;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * @author Leandro
  */
 public class ListPublisher extends JFrame {
+
+    List<Integer> publisherIds = new ArrayList<>();
+
     public ListPublisher() {
         initComponents();
     }
 
-    private void buttonRefreshActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void buttonAddActionPerformed(ActionEvent e) {
+        AddPublisher addPublisher = new AddPublisher();
+        addPublisher.setLocationRelativeTo(null);
+        addPublisher.setVisible(true);
     }
 
-    private void buttonAddActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void buttonRefreshActionPerformed(ActionEvent e) {
+        getScrollPanelPublisher();
+    }
+
+    private void thisWindowOpened(WindowEvent e) {
+        getScrollPanelPublisher();
+    }
+
+    private JScrollPane getScrollPanelPublisher() {
+        scrollPanelPublisher.setViewportView(getTablePublisher());
+        return scrollPanelPublisher;
+    }
+
+    private JTable getTablePublisher() {
+        PublisherService publisherService = new PublisherService();
+        String[] header = {"Nome", "URL", "", ""};
+        try {
+            String[][] publishers = publisherService.getAll(publisherIds);
+            TableModel tableModelPublisher = new DefaultTableModel(publishers, header);
+            tablePublisher = new JTable();
+            tablePublisher.setModel(tableModelPublisher);
+
+            Action actionEdit = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int row = Integer.parseInt(e.getActionCommand());
+                    try {
+                        Publisher publisher = publisherService.getById(publisherIds.get(row));
+                        editPublisher(publisher);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
+                    }
+                }
+            };
+
+            Action actionRemove = new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int response = JOptionPane.showConfirmDialog(ListPublisher.this, "Deseja remover o registro?");
+                    if (response == 0) {
+                        JTable table = (JTable) e.getSource();
+                        int row = Integer.parseInt(e.getActionCommand());
+                        ((DefaultTableModel) table.getModel()).removeRow(row);
+                        try {
+                            publisherService.delete(publisherIds.get(row));
+                            MessageUtil.addMessage(ListPublisher.this, "Autor removido com sucesso!");
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                            MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
+                        }
+                    }
+                }
+            };
+
+            ButtonColumn buttonColumnEdit = new ButtonColumn(tablePublisher, actionEdit, 2);
+            ButtonColumn buttonColumnRemove = new ButtonColumn(tablePublisher, actionRemove, 3);
+            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
+            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageUtil.addMessage(ListPublisher.this, e.getMessage());
+        }
+        return tablePublisher;
+    }
+
+    private void editPublisher(Publisher publisher) {
+        AddPublisher addPublisher = new AddPublisher(String.valueOf(publisher.getId()), publisher.getName(), publisher.getUrl());
+        addPublisher.setLocationRelativeTo(null);
+        addPublisher.setVisible(true);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
@@ -35,6 +117,12 @@ public class ListPublisher extends JFrame {
         buttonRefresh = new JButton();
 
         //======== this ========
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                thisWindowOpened(e);
+            }
+        });
         Container contentPane = getContentPane();
 
         //======== panelPublisher ========
@@ -75,7 +163,7 @@ public class ListPublisher extends JFrame {
                             .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelPublisherLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 611, Short.MAX_VALUE)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
@@ -108,7 +196,7 @@ public class ListPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;
