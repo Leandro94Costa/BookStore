@@ -23,7 +23,7 @@ import javax.swing.table.TableModel;
  */
 public class ListPublisher extends JFrame {
 
-    List<Integer> publisherIds = new ArrayList<>();
+    List<Integer> publisherIds;
 
     public ListPublisher() {
         initComponents();
@@ -44,6 +44,7 @@ public class ListPublisher extends JFrame {
     }
 
     private JScrollPane getScrollPanelPublisher() {
+        publisherIds = new ArrayList<>();
         scrollPanelPublisher.setViewportView(getTablePublisher());
         return scrollPanelPublisher;
     }
@@ -81,7 +82,7 @@ public class ListPublisher extends JFrame {
                         ((DefaultTableModel) table.getModel()).removeRow(row);
                         try {
                             publisherService.delete(publisherIds.get(row));
-                            MessageUtil.addMessage(ListPublisher.this, "Autor removido com sucesso!");
+                            MessageUtil.addMessage(ListPublisher.this, "Editora removida com sucesso!");
                         } catch (Exception e1) {
                             e1.printStackTrace();
                             MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
@@ -109,7 +110,7 @@ public class ListPublisher extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
@@ -117,6 +118,7 @@ public class ListPublisher extends JFrame {
         buttonRefresh = new JButton();
 
         //======== this ========
+        setTitle("Editoras");
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -163,7 +165,7 @@ public class ListPublisher extends JFrame {
                             .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelPublisherLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 611, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
@@ -196,7 +198,7 @@ public class ListPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;

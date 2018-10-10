@@ -4,6 +4,7 @@ import br.com.bookstore.domain.dao.PublisherDAO;
 import br.com.bookstore.domain.entity.Publisher;
 
 import java.util.List;
+import java.util.Map;
 
 public class PublisherService {
 
@@ -11,9 +12,8 @@ public class PublisherService {
 
     public String[][] getAll(List<Integer> publisherIds) throws Exception {
         int numColumns = 4;
-        String[][] publishers;
         List<Publisher> publisherList = dao.getAll();
-        publishers = new String[publisherList.size()][numColumns];
+        String[][] publishers = new String[publisherList.size()][numColumns];
         for (int i = 0; i < publisherList.size(); i++) {
             Publisher publisher = publisherList.get(i);
             publisherIds.add(publisher.getId());
@@ -23,6 +23,17 @@ public class PublisherService {
             publishers[i][3] = "Remover";
         }
         return publishers;
+    }
+
+    public String[] getNames(Map<Integer, Integer> publisherIds) throws Exception {
+        List<Publisher> publishers = dao.getAll();
+        String[] names = new String[publishers.size()];
+        for (int i = 0; i < publishers.size(); i++) {
+            Publisher publisher = publishers.get(i);
+            publisherIds.put(i, publisher.getId());
+            names[i] = publisher.getName();
+        }
+        return names;
     }
 
     public Publisher getById(Integer id) throws Exception {

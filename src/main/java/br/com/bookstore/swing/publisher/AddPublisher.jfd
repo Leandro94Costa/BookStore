@@ -1,14 +1,14 @@
-JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {seq l {space :p:25:p, par l:::p {seq {comp txtId:::p::p, space :::x, comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}, comp lblName:::p::p, comp txtName:::p:375:p, comp txtURL:::p:375:p, comp lblURL::l:p::p}, space ::28:x}}"
-			"$verticalGroup": "par l {seq l {space :p:22:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:29:p, comp lblURL:::p:16:p, space :::p, comp txtURL:::p::p, space :p:47:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p, comp txtId::b:p::p}, space ::39:x}}"
+			"$verticalGroup": "par l {seq l {space :p:22:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:29:p, comp lblURL:::p:16:p, space :::p, comp txtURL:::p::p, space :p:47:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p, comp txtId::b:p::p}, space ::41:x}}"
 		} ) {
 			name: "this"
-			"title": "Editora"
+			"title": "Adicionar editora"
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "txtName"
 			} )

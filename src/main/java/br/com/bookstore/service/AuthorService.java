@@ -3,7 +3,9 @@ package br.com.bookstore.service;
 import br.com.bookstore.domain.dao.AuthorDAO;
 import br.com.bookstore.domain.entity.Author;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AuthorService {
 
@@ -11,9 +13,8 @@ public class AuthorService {
 
     public String[][] getAll(List<Integer> authorIds) throws Exception {
         int numColumns = 4;
-        String[][] authors;
         List<Author> authorList = dao.getAll();
-        authors = new String[authorList.size()][numColumns];
+        String[][] authors = new String[authorList.size()][numColumns];
         for (int i = 0; i < authorList.size(); i++) {
             Author author = authorList.get(i);
             authorIds.add(author.getId());
@@ -23,6 +24,17 @@ public class AuthorService {
             authors[i][3] = "Remover";
         }
         return authors;
+    }
+
+    public String[] getNames(Map<Integer, Integer> authorIds) throws Exception {
+        List<Author> authors = dao.getAll();
+        String[] names = new String[authors.size()];
+        for (int i = 0; i < authors.size(); i++) {
+            Author author = authors.get(i);
+            authorIds.put(i, author.getId());
+            names[i] = author.getFirstName() + " " + author.getName();
+        }
+        return names;
     }
 
     public Author getById(Integer id) throws Exception {

@@ -24,6 +24,7 @@ public class AddAuthor extends JFrame {
 
     public AddAuthor(String id, String name, String surname) {
         initComponents();
+        this.setTitle("Editar autor");
         txtId.setText(id);
         txtName.setText(name);
         txtSurname.setText(surname);
@@ -69,7 +70,7 @@ public class AddAuthor extends JFrame {
         txtId = new JLabel();
 
         //======== this ========
-        setTitle("Autor");
+        setTitle("Adicionar autor");
         Container contentPane = getContentPane();
 
         //---- lblName ----
@@ -95,18 +96,17 @@ public class AddAuthor extends JFrame {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(35, 35, 35)
-                    .addGroup(contentPaneLayout.createParallelGroup()
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtName, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                         .addComponent(txtId)
                         .addComponent(lblSurname)
                         .addComponent(lblName)
-                        .addComponent(txtName, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(contentPaneLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                                .addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancel))
-                            .addComponent(txtSurname, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(53, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCancel))
+                        .addComponent(txtSurname, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+                    .addContainerGap(43, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -117,7 +117,7 @@ public class AddAuthor extends JFrame {
                     .addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(lblSurname)
-                    .addGap(0, 0, 0)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtSurname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(33, 33, 33)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -125,7 +125,7 @@ public class AddAuthor extends JFrame {
                         .addComponent(btnSave))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtId)
-                    .addContainerGap(54, Short.MAX_VALUE))
+                    .addContainerGap(48, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());

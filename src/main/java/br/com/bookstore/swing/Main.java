@@ -26,7 +26,7 @@ import javax.swing.table.TableModel;
  */
 public class Main extends JFrame {
 
-    private List<Long> bookIds = new ArrayList<>();
+    private List<Long> bookIds;
 
     public Main() {
         initComponents();
@@ -49,16 +49,16 @@ public class Main extends JFrame {
         listAuthor.setVisible(true);
     }
 
-    private void buttonAddActionPerformed(ActionEvent e) {
-        AddBook addBook = new AddBook();
-        addBook.setLocationRelativeTo(null);
-        addBook.setVisible(true);
-    }
-
     private void menuItemPublisherActionPerformed(ActionEvent e) {
         ListPublisher listPublisher = new ListPublisher();
         listPublisher.setLocationRelativeTo(null);
         listPublisher.setVisible(true);
+    }
+
+    private void buttonAddActionPerformed(ActionEvent e) {
+        AddBook addBook = new AddBook();
+        addBook.setLocationRelativeTo(null);
+        addBook.setVisible(true);
     }
 
     private void buttonRefreshActionPerformed(ActionEvent e) {
@@ -70,6 +70,7 @@ public class Main extends JFrame {
     }
 
     private JScrollPane getScrollPane() {
+        bookIds = new ArrayList<>();
         scrollPanelMain.setViewportView(getTableMain());
         return scrollPanelMain;
     }
@@ -128,7 +129,8 @@ public class Main extends JFrame {
     }
 
     private void editBook(Book book) {
-        AddBook addBook = new AddBook(book.getIsbn().toString(), book.getTitle().toString(), book.getPrice().toString());
+        AddBook addBook = new AddBook(book.getIsbn().toString(), book.getTitle().toString(), book.getPrice().toString(),
+                book.getPublisher().getId());
         addBook.setLocationRelativeTo(null);
         addBook.setVisible(true);
     }
@@ -150,6 +152,7 @@ public class Main extends JFrame {
         buttonRefresh = new JButton();
 
         //======== this ========
+        setTitle("Livros");
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {

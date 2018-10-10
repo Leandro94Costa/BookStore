@@ -25,6 +25,7 @@ public class AddPublisher extends JFrame {
 
     public AddPublisher(String id, String name, String url) {
         initComponents();
+        this.setTitle("Editar editora");
         txtId.setText(id);
         txtName.setText(name);
         txtURL.setText(url);
@@ -36,7 +37,7 @@ public class AddPublisher extends JFrame {
 
     private void btnSaveActionPerformed(ActionEvent e) {
         if (!"".equals(txtName.getText())) {
-            int idPublisher = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
+            Integer idPublisher = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             String urlPublisher = !"".equals(txtURL.getText()) ? txtURL.getText() : null;
             Publisher publisher = new Publisher(idPublisher, txtName.getText(), urlPublisher);
             PublisherService publisherService = new PublisherService();
@@ -55,7 +56,7 @@ public class AddPublisher extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         txtName = new JTextField();
         lblURL = new JLabel();
         txtURL = new JTextField();
@@ -65,7 +66,7 @@ public class AddPublisher extends JFrame {
         txtId = new JLabel();
 
         //======== this ========
-        setTitle("Editora");
+        setTitle("Adicionar editora");
         Container contentPane = getContentPane();
 
         //---- lblURL ----
@@ -120,7 +121,7 @@ public class AddPublisher extends JFrame {
                         .addComponent(btnCancel)
                         .addComponent(btnSave)
                         .addComponent(txtId))
-                    .addContainerGap(39, Short.MAX_VALUE))
+                    .addContainerGap(41, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -128,7 +129,7 @@ public class AddPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JTextField txtName;
     private JLabel lblURL;
     private JTextField txtURL;

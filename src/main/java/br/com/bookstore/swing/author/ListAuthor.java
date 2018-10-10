@@ -23,7 +23,7 @@ import javax.swing.table.TableModel;
  */
 public class ListAuthor extends JFrame {
 
-    List<Integer> authorIds = new ArrayList<Integer>();
+    List<Integer> authorIds;
 
     public ListAuthor() {
         initComponents();
@@ -44,6 +44,7 @@ public class ListAuthor extends JFrame {
     }
 
     private JScrollPane getScrollPanelAuthor() {
+        authorIds = new ArrayList<>();
         scrollPanelAuthor.setViewportView(getTableAuthor());
         return scrollPanelAuthor;
     }
@@ -109,7 +110,7 @@ public class ListAuthor extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
@@ -117,6 +118,7 @@ public class ListAuthor extends JFrame {
         buttonRefresh = new JButton();
 
         //======== this ========
+        setTitle("Autores");
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -197,7 +199,7 @@ public class ListAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;

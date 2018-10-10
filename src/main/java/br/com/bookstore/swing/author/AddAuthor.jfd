@@ -4,11 +4,11 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:35:p, par l {comp txtId:::p::p, comp lblSurname:::p::p, comp lblName:::p::p, comp txtName::l:p:310:p, par l:l {seq t {comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}, comp txtSurname::l:p:310:p}}, space ::53:x}}"
-			"$verticalGroup": "par l {seq l {space :p:30:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:18:p, comp lblSurname:::p::p, space :0:0:p, comp txtSurname:::p::p, space :p:33:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space :::p, comp txtId:::p::p, space ::54:x}}"
+			"$horizontalGroup": "par l {seq l {space :p:35:p, par l:::p {comp txtName::l::320:x, comp txtId:::p::p, comp lblSurname:::p::p, comp lblName:::p::p, seq t {comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}, comp txtSurname::l::320:x}, space ::43:x}}"
+			"$verticalGroup": "par l {seq l {space :p:30:p, comp lblName:::p::p, space :::p, comp txtName:::p::p, space :p:18:p, comp lblSurname:::p::p, space :::p, comp txtSurname:::p::p, space :p:33:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space :::p, comp txtId:::p::p, space ::48:x}}"
 		} ) {
 			name: "this"
-			"title": "Autor"
+			"title": "Adicionar autor"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lblName"
 				"text": "Nome"

@@ -12,9 +12,8 @@ public class BookService {
 
     public String[][] getAll(List<Long> bookIds) throws Exception {
         int numColumns = 7;
-        String[][] books;
         List<Book> bookList = dao.getAll();
-        books = new String[bookList.size()][numColumns];
+        String[][] books = new String[bookList.size()][numColumns];
         for (int i = 0; i < bookList.size(); i++) {
             Book book = bookList.get(i);
             bookIds.add(book.getIsbn());
