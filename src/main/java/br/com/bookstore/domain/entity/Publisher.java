@@ -16,7 +16,7 @@ public class Publisher {
 
     private String url;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER)
     private List<Book> books;
 
     public Publisher() {

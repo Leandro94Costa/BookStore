@@ -37,6 +37,14 @@ public class AuthorService {
         return names;
     }
 
+    public List<Author> getAuthorsById(List<Integer> authorIds) throws Exception {
+        List<Author> authors = new ArrayList<>();
+        for (Integer id : authorIds) {
+            authors.add(getById(id));
+        }
+        return authors;
+    }
+
     public Author getById(Integer id) throws Exception {
         return dao.getById(id);
     }

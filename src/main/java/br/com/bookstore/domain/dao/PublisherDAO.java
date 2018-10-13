@@ -13,15 +13,13 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
     public List<Publisher> getAll() throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         List<Publisher> publishers;
-
         try {
-            publishers = entityManager.createQuery("select p from Publisher p", Publisher.class).getResultList();
+            publishers = entityManager.createQuery("select p from Publisher p order by p.name", Publisher.class).getResultList();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-
         return publishers;
     }
 
@@ -29,7 +27,6 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
     public Publisher getById(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Publisher publisher;
-
         try {
             publisher = entityManager.find(Publisher.class, id);
         } catch (Exception e) {
@@ -37,7 +34,6 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
         } finally {
             entityManager.close();
         }
-
         return publisher;
     }
 
@@ -45,25 +41,19 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
     public Integer save(Publisher publisher) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Integer id;
-
         try {
-            //entityManager.getTransaction().begin();
             id = (Integer) entityManager.unwrap(Session.class).save(publisher);
-            //entityManager.getTransaction().commit();
         } catch (Exception e) {
-            //entityManager.getTransaction().rollback();
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-
         return id;
     }
 
     @Override
     public void update(Publisher publisher) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(publisher);
@@ -79,7 +69,6 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
     @Override
     public void delete(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-
         try {
             entityManager.getTransaction().begin();
             Publisher publisher = entityManager.find(Publisher.class, id);

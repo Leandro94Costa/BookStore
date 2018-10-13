@@ -13,15 +13,13 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
     public List<Author> getAll() throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         List<Author> authors;
-
         try {
-            authors = entityManager.createQuery("select a from Author a", Author.class).getResultList();
+            authors = entityManager.createQuery("select a from Author a order by a.firstName", Author.class).getResultList();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-
         return authors;
     }
 
@@ -29,7 +27,6 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
     public Author getById(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Author author;
-
         try {
             author = entityManager.find(Author.class, id);
         } catch (Exception e) {
@@ -37,14 +34,12 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
         } finally {
             entityManager.close();
         }
-
         return author;
     }
 
     public List<Author> getAuthorsByBook(Long id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         List<Author> authors;
-
         try {
             authors = entityManager.createQuery("select a from Book b inner join b.authors a where b.id = :bookId", Author.class)
                     .setParameter("bookId", id)
@@ -54,7 +49,6 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
         } finally {
             entityManager.close();
         }
-
         return authors;
     }
 
@@ -62,25 +56,19 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
     public Integer save(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Integer id;
-
         try {
-            //entityManager.getTransaction().begin();
             id = (Integer) entityManager.unwrap(Session.class).save(author);
-            //entityManager.getTransaction().commit();
         } catch (Exception e) {
-            //entityManager.getTransaction().rollback();
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-
         return id;
     }
 
     @Override
     public void update(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(author);
@@ -96,7 +84,6 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
     @Override
     public void delete(Integer id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-
         try {
             entityManager.getTransaction().begin();
             Author author = entityManager.find(Author.class, id);

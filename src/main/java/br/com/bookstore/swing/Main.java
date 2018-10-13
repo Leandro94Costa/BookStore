@@ -130,13 +130,9 @@ public class Main extends JFrame {
 
     private void editBook(Book book) {
         AddBook addBook = new AddBook(book.getIsbn().toString(), book.getTitle().toString(), book.getPrice().toString(),
-                book.getPublisher().getId());
+                book.getPublisher().getId(), book.getAuthors());
         addBook.setLocationRelativeTo(null);
         addBook.setVisible(true);
-    }
-
-    private void menuItemBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void initComponents() {
@@ -200,6 +196,7 @@ public class Main extends JFrame {
             //---- buttonRefresh ----
             buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
             buttonRefresh.addActionListener(e -> {
+			buttonRefreshActionPerformed(e);
 			buttonRefreshActionPerformed(e);
 			buttonRefreshActionPerformed(e);
 		});

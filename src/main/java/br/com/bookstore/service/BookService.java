@@ -46,11 +46,11 @@ public class BookService {
     }
 
     public void save(Book book) throws Exception {
-        dao.save(book);
-    }
-
-    public void update(Book book) throws Exception {
-        dao.update(book);
+        if (getById(book.getIsbn()) == null) {
+            dao.save(book);
+        } else {
+            dao.update(book);
+        }
     }
 
     public void delete(Long id) throws Exception {

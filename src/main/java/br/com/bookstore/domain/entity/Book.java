@@ -14,11 +14,11 @@ public class Book {
 
     private Float price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "books_authors",
             joinColumns = {@JoinColumn(name = "isbn")},
