@@ -5,6 +5,7 @@
 package br.com.bookstore.swing.publisher;
 
 import br.com.bookstore.domain.entity.Publisher;
+import br.com.bookstore.service.BookService;
 import br.com.bookstore.service.PublisherService;
 import br.com.bookstore.swing.util.ButtonColumn;
 import br.com.bookstore.util.MessageUtil;
@@ -75,14 +76,25 @@ public class ListPublisher extends JFrame {
             Action actionRemove = new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int response = JOptionPane.showConfirmDialog(ListPublisher.this, "Deseja remover o registro?");
+                    int response = JOptionPane.showConfirmDialog(ListPublisher.this, "Deseja remover a editora?");
                     if (response == 0) {
                         JTable table = (JTable) e.getSource();
                         int row = Integer.parseInt(e.getActionCommand());
-                        ((DefaultTableModel) table.getModel()).removeRow(row);
                         try {
-                            publisherService.delete(publisherIds.get(row));
-                            MessageUtil.addMessage(ListPublisher.this, "Editora removida com sucesso!");
+                            if (!publisherService.hasBooks(publisherIds.get(row))) {
+                                publisherService.delete(publisherIds.get(row));
+                                ((DefaultTableModel) table.getModel()).removeRow(row);
+                                MessageUtil.addMessage(ListPublisher.this, "Editora removida com sucesso!");
+                            } else {
+                                int reply = JOptionPane.showConfirmDialog(ListPublisher.this, "Editora com livros salvos, deseja remover os livros e a editora?");
+                                if (reply == 0) {
+                                    BookService bookService = new BookService();
+                                    bookService.deleteByPublisher(publisherIds.get(row));
+                                    publisherService.delete(publisherIds.get(row));
+                                    ((DefaultTableModel) table.getModel()).removeRow(row);
+                                    MessageUtil.addMessage(ListPublisher.this, "Editora e livros removidos com sucesso!");
+                                }
+                            }
                         } catch (Exception e1) {
                             e1.printStackTrace();
                             MessageUtil.addMessage(ListPublisher.this, e1.getMessage());

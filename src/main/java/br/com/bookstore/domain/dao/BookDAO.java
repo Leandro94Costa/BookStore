@@ -2,7 +2,6 @@ package br.com.bookstore.domain.dao;
 
 import br.com.bookstore.domain.entity.Book;
 import br.com.bookstore.util.JpaUtil;
-import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -38,17 +37,18 @@ public class BookDAO implements GenericDAO<Book, Long> {
     }
 
     @Override
-    public Long save(Book book) throws Exception {
+    public void save(Book book) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-        Long id;
         try {
-            id = (Long) entityManager.unwrap(Session.class).save(book);
+            entityManager.getTransaction().begin();
+            entityManager.persist(book);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-        return id;
     }
 
     @Override
@@ -73,6 +73,20 @@ public class BookDAO implements GenericDAO<Book, Long> {
             entityManager.getTransaction().begin();
             Book book = entityManager.find(Book.class, id);
             entityManager.remove(book);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void deleteByPublisher(Integer id) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.createQuery("delete from Book b where b.publisher.id = :publisherId").setParameter("publisherId", id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

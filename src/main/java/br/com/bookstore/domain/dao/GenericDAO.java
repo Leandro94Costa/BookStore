@@ -10,7 +10,7 @@ public interface GenericDAO<T, U> {
 
     T getById(U id) throws Exception;
 
-    U save(T object) throws Exception;
+    void save(T object) throws Exception;
 
     void update(T object) throws Exception;
 

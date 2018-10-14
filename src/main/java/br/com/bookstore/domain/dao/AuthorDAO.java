@@ -2,7 +2,6 @@ package br.com.bookstore.domain.dao;
 
 import br.com.bookstore.domain.entity.Author;
 import br.com.bookstore.util.JpaUtil;
-import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -53,17 +52,18 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
     }
 
     @Override
-    public Integer save(Author author) throws Exception {
+    public void save(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
-        Integer id;
         try {
-            id = (Integer) entityManager.unwrap(Session.class).save(author);
+            entityManager.getTransaction().begin();
+            entityManager.persist(author);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-        return id;
     }
 
     @Override

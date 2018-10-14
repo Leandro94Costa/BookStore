@@ -12,6 +12,7 @@ public class Book {
 
     private String title;
 
+    @Column(length = 10, precision = 2)
     private Float price;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -21,8 +22,8 @@ public class Book {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "books_authors",
-            joinColumns = {@JoinColumn(name = "isbn")},
-            inverseJoinColumns = {@JoinColumn(name = "author_id")}
+            joinColumns = @JoinColumn(name = "isbn"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     private List<Author> authors;
 

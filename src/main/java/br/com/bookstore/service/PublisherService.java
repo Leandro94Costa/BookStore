@@ -51,4 +51,8 @@ public class PublisherService {
     public void delete(Integer id) throws Exception {
         dao.delete(id);
     }
+
+    public boolean hasBooks(Integer id) {
+        return dao.hasBooks(id);
+    }
 }

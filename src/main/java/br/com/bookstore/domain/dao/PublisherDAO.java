@@ -2,7 +2,6 @@ package br.com.bookstore.domain.dao;
 
 import br.com.bookstore.domain.entity.Publisher;
 import br.com.bookstore.util.JpaUtil;
-import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -37,18 +36,29 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
         return publisher;
     }
 
-    @Override
-    public Integer save(Publisher publisher) throws Exception {
+    public boolean hasBooks(Integer id) {
         EntityManager entityManager = JpaUtil.getEntityManager();
-        Integer id;
+        boolean result;
+        result = (boolean) entityManager.createQuery("select case when (count(b.isbn) > 0) then true else false end from Book b where b.publisher.id = :publisherId")
+                .setParameter("publisherId", id)
+                .getSingleResult();
+        entityManager.close();
+        return result;
+    }
+
+    @Override
+    public void save(Publisher publisher) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         try {
-            id = (Integer) entityManager.unwrap(Session.class).save(publisher);
+            entityManager.getTransaction().begin();
+            entityManager.persist(publisher);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             throw new Exception(e.getMessage());
         } finally {
             entityManager.close();
         }
-        return id;
     }
 
     @Override

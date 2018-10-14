@@ -56,4 +56,8 @@ public class BookService {
     public void delete(Long id) throws Exception {
         dao.delete(id);
     }
+
+    public void deleteByPublisher(Integer id) throws Exception {
+        dao.deleteByPublisher(id);
+    }
 }

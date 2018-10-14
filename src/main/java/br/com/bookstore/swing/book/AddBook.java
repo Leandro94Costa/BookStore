@@ -13,6 +13,7 @@ import br.com.bookstore.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
