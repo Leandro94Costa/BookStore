@@ -60,4 +60,9 @@ public class BookService {
     public void deleteByPublisher(Integer id) throws Exception {
         dao.deleteByPublisher(id);
     }
+
+    public void deleteByAuthor(Integer id) throws Exception {
+        List<Long> ids = dao.getIdsByAuthor(id);
+        dao.deleteByAuthor(ids);
+    }
 }

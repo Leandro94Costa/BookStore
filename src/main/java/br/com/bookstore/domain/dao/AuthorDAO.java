@@ -51,6 +51,17 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
         return authors;
     }
 
+    public boolean hasBooks(Integer id) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        boolean result;
+        result = (boolean) entityManager.createQuery("select case when (count(b.isbn) > 0) then true else false end " +
+                "from Book b join b.authors a where a.id = :authorId")
+                .setParameter("authorId", id)
+                .getSingleResult();
+        entityManager.close();
+        return result;
+    }
+
     @Override
     public void save(Author author) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();

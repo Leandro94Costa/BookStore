@@ -86,8 +86,8 @@ public class ListPublisher extends JFrame {
                                 ((DefaultTableModel) table.getModel()).removeRow(row);
                                 MessageUtil.addMessage(ListPublisher.this, "Editora removida com sucesso!");
                             } else {
-                                int reply = JOptionPane.showConfirmDialog(ListPublisher.this, "Editora com livros salvos, deseja remover os livros e a editora?");
-                                if (reply == 0) {
+                                response = JOptionPane.showConfirmDialog(ListPublisher.this, "Editora com livros salvos, deseja remover os livros e a editora?");
+                                if (response == 0) {
                                     BookService bookService = new BookService();
                                     bookService.deleteByPublisher(publisherIds.get(row));
                                     publisherService.delete(publisherIds.get(row));
@@ -122,7 +122,7 @@ public class ListPublisher extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
@@ -157,11 +157,11 @@ public class ListPublisher extends JFrame {
 
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
-            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Library32.png"));
+            buttonAdd.setIcon(new ImageIcon(getClass().getResource("/icons/Library32.png")));
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
 
             //---- buttonRefresh ----
-            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.setIcon(new ImageIcon(getClass().getResource("/icons/Refresh32.png")));
             buttonRefresh.addActionListener(e -> {
 			buttonRefreshActionPerformed(e);
 			buttonRefreshActionPerformed(e);
@@ -177,7 +177,7 @@ public class ListPublisher extends JFrame {
                             .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelPublisherLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
@@ -210,7 +210,7 @@ public class ListPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;

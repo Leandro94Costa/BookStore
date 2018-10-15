@@ -4,7 +4,6 @@
 
 package br.com.bookstore.swing.publisher;
 
-import br.com.bookstore.domain.entity.Author;
 import br.com.bookstore.domain.entity.Publisher;
 import br.com.bookstore.service.PublisherService;
 import br.com.bookstore.util.MessageUtil;

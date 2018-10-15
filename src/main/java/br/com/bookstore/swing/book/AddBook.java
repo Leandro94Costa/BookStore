@@ -82,7 +82,8 @@ public class AddBook extends JFrame {
     }
 
     private void setUpFormat() {
-        DecimalFormat decimal = new DecimalFormat("########.00");
+        //DecimalFormat decimal = new DecimalFormat("########.00");
+        DecimalFormat decimal = new DecimalFormat("########,00");
         NumberFormatter numberFormatter = new NumberFormatter(decimal);
         numberFormatter.setFormat(decimal);
         numberFormatter.setAllowsInvalid(false);
@@ -125,29 +126,35 @@ public class AddBook extends JFrame {
         boolean valid = true;
         if (!"".equals(txtISBN.getText())) {
             if (txtISBN.getText().length() > 20) {
-                valid = false;
                 MessageUtil.addMessage(AddBook.this, "Campo ISBN tamanho máximo 20 dígitos");
+                valid = false;
             }
         } else {
-            MessageUtil.addMessage(AddBook.this, "Campo ISBN obrigátorio");
+            MessageUtil.addMessage(AddBook.this, "Campo ISBN obrigatório");
             valid = false;
         }
         if (!"".equals(txtPrice.getText())) {
             if (txtPrice.getText().length() > 11) {
-                valid = false;
                 MessageUtil.addMessage(AddBook.this, "Campo PREÇO tamanho máximo 10 dígitos");
+                valid = false;
             }
         } else {
-            MessageUtil.addMessage(AddBook.this, "Campo PREÇO obrigátorio");
+            MessageUtil.addMessage(AddBook.this, "Campo PREÇO obrigatório");
             valid = false;
         }
         if (!"".equals(txtTitle.getText())) {
             if (txtTitle.getText().length() > 60) {
-                valid = false;
                 MessageUtil.addMessage(AddBook.this, "Campo TÍTULO tamanho máximo 60 caracteres");
+                valid = false;
             }
         } else {
-            MessageUtil.addMessage(AddBook.this, "Campo TÍTULO obrigátorio");
+            MessageUtil.addMessage(AddBook.this, "Campo TÍTULO obrigatório");
+            valid = false;
+        }
+        try {
+           cbxPublisher.getSelectedItem().toString();
+        } catch (NullPointerException np) {
+            MessageUtil.addMessage(AddBook.this, "Editora obrigatória");
             valid = false;
         }
         if (listAuthor.getSelectedIndices() == null) {
@@ -190,7 +197,7 @@ public class AddBook extends JFrame {
         try {
             if (e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_RIGHT
                     && e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
-                Integer.parseInt(txtISBN.getText());
+                Integer.parseInt(txtISBN.getText() + e.getKeyChar());
             }
         } catch (NumberFormatException e1) {
             MessageUtil.addMessage(AddBook.this, "Válido apenas números");

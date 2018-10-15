@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
- * @author unknown
+ * @author Leandro Costa
  */
 public class AddAuthor extends JFrame {
 

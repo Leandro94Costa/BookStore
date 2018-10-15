@@ -36,6 +36,23 @@ public class BookDAO implements GenericDAO<Book, Long> {
         return book;
     }
 
+    public List<Long> getIdsByAuthor(Integer id) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        List<Long> ids;
+        try {
+            entityManager.getTransaction().begin();
+            ids = entityManager.createQuery("select b.isbn from Book b join b.authors a where a.id = :authorId")
+                    .setParameter("authorId", id)
+                    .getResultList();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return ids;
+    }
+
     @Override
     public void save(Book book) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
@@ -86,7 +103,25 @@ public class BookDAO implements GenericDAO<Book, Long> {
         EntityManager entityManager = JpaUtil.getEntityManager();
         try {
             entityManager.getTransaction().begin();
-            entityManager.createQuery("delete from Book b where b.publisher.id = :publisherId").setParameter("publisherId", id);
+            entityManager.createQuery("delete from Book b where b.publisher.id = :publisherId")
+                    .setParameter("publisherId", id)
+                    .executeUpdate();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void deleteByAuthor(List<Long> ids) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.createQuery("delete from Book b where b.isbn in :bookIds")
+                    .setParameter("bookIds", ids)
+                    .executeUpdate();
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

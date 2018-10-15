@@ -137,7 +137,7 @@ public class Main extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         menuBar = new JMenuBar();
         menuItemAuthor = new JMenuItem();
         menuItemPublisher = new JMenuItem();
@@ -190,11 +190,11 @@ public class Main extends JFrame {
 
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
-            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Books32.png"));
+            buttonAdd.setIcon(new ImageIcon(getClass().getResource("/icons/Books32.png")));
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
 
             //---- buttonRefresh ----
-            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.setIcon(new ImageIcon(getClass().getResource("/icons/Refresh32.png")));
             buttonRefresh.addActionListener(e -> {
 			buttonRefreshActionPerformed(e);
 			buttonRefreshActionPerformed(e);
@@ -211,7 +211,7 @@ public class Main extends JFrame {
                             .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelMainLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
@@ -223,7 +223,7 @@ public class Main extends JFrame {
                             .addComponent(buttonAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonRefresh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                        .addComponent(scrollPanelMain, GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -244,7 +244,7 @@ public class Main extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JMenuBar menuBar;
     private JMenuItem menuItemAuthor;
     private JMenuItem menuItemPublisher;

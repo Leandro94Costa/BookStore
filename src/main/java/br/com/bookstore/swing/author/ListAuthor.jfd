@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -24,12 +24,12 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonAdd"
 					"text": "Adicionar"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\AddUser32.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/AddUser32.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonRefresh"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/Refresh32.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
 				} )
 			} )

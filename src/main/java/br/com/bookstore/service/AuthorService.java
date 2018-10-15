@@ -64,4 +64,8 @@ public class AuthorService {
     public List<Author> getAuthorsByBook(Long id) throws Exception {
         return dao.getAuthorsByBook(id);
     }
+
+    public boolean hasBooks(Integer id) {
+        return dao.hasBooks(id);
+    }
 }

@@ -6,6 +6,7 @@ package br.com.bookstore.swing.author;
 
 import br.com.bookstore.domain.entity.Author;
 import br.com.bookstore.service.AuthorService;
+import br.com.bookstore.service.BookService;
 import br.com.bookstore.swing.util.ButtonColumn;
 import br.com.bookstore.util.MessageUtil;
 
@@ -75,14 +76,26 @@ public class ListAuthor extends JFrame {
             Action actionRemove = new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int response = JOptionPane.showConfirmDialog(ListAuthor.this, "Deseja remover o registro?");
+                    int response = JOptionPane.showConfirmDialog(ListAuthor.this, "Deseja remover o autor?");
                     if (response == 0) {
                         JTable table = (JTable) e.getSource();
                         int row = Integer.parseInt(e.getActionCommand());
-                        ((DefaultTableModel) table.getModel()).removeRow(row);
                         try {
-                            authorService.delete(authorIds.get(row));
-                            MessageUtil.addMessage(ListAuthor.this, "Autor removido com sucesso!");
+                            if (!authorService.hasBooks(authorIds.get(row))) {
+                                authorService.delete(authorIds.get(row));
+                                ((DefaultTableModel) table.getModel()).removeRow(row);
+                                MessageUtil.addMessage(ListAuthor.this, "Autor removido com sucesso!");
+                            } else {
+                                response = JOptionPane.showConfirmDialog(ListAuthor.this,
+                                        "Autor ou coautor de ao menos um livro, deseja excluir todos os livros relacionados a esse autor?");
+                                if (response == 0) {
+                                    BookService bookService = new BookService();
+                                    bookService.deleteByAuthor(authorIds.get(row));
+                                    authorService.delete(authorIds.get(row));
+                                    ((DefaultTableModel) table.getModel()).removeRow(row);
+                                    MessageUtil.addMessage(ListAuthor.this, "Autor e livros removidos com sucesso!");
+                                }
+                            }
                         } catch (Exception e1) {
                             e1.printStackTrace();
                             MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
@@ -110,7 +123,7 @@ public class ListAuthor extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
@@ -145,11 +158,11 @@ public class ListAuthor extends JFrame {
 
             //---- buttonAdd ----
             buttonAdd.setText("Adicionar");
-            buttonAdd.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\AddUser32.png"));
+            buttonAdd.setIcon(new ImageIcon(getClass().getResource("/icons/AddUser32.png")));
             buttonAdd.addActionListener(e -> buttonAddActionPerformed(e));
 
             //---- buttonRefresh ----
-            buttonRefresh.setIcon(new ImageIcon("D:\\Documents\\Java\\Projects\\BookStore\\src\\main\\resources\\icons\\Refresh32.png"));
+            buttonRefresh.setIcon(new ImageIcon(getClass().getResource("/icons/Refresh32.png")));
             buttonRefresh.addActionListener(e -> buttonRefreshActionPerformed(e));
 
             GroupLayout panelAuthorLayout = new GroupLayout(panelAuthor);
@@ -199,7 +212,7 @@ public class ListAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;
