@@ -33,13 +33,10 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Main main = new Main();
-                main.setLocationRelativeTo(null);
-                main.setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            Main main = new Main();
+            main.setLocationRelativeTo(null);
+            main.setVisible(true);
         });
     }
 
@@ -101,14 +98,14 @@ public class Main extends JFrame {
             Action actionDelete = new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int response = JOptionPane.showConfirmDialog(Main.this, "Deseja remover o registro?");
+                    int response = JOptionPane.showConfirmDialog(Main.this, "Deseja remover o livro?");
                     if (response == 0) {
                         JTable table = (JTable) e.getSource();
                         int row = Integer.parseInt(e.getActionCommand());
                         ((DefaultTableModel) table.getModel()).removeRow(row);
                         try {
                             bookService.delete(bookIds.get(row));
-                            MessageUtil.addMessage(Main.this, "Registro removido com sucesso!");
+                            MessageUtil.addMessage(Main.this, "Livro removido com sucesso!");
                         } catch (Exception e1) {
                             e1.printStackTrace();
                             MessageUtil.addMessage(Main.this, e1.getMessage());
@@ -119,8 +116,8 @@ public class Main extends JFrame {
 
             ButtonColumn buttonColumnEdit = new ButtonColumn(tableMain, actionEdit, 5);
             ButtonColumn buttonColumnRemove = new ButtonColumn(tableMain, actionDelete, 6);
-            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
-            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
+            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);
+            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);
         } catch (Exception e) {
             e.printStackTrace();
             MessageUtil.addMessage(Main.this, e.getMessage());
@@ -174,16 +171,6 @@ public class Main extends JFrame {
 
         //======== panelMain ========
         {
-
-            // JFormDesigner evaluation mark
-            panelMain.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panelMain.getBorder())); panelMain.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
-
-            //======== scrollPanelMain ========
             {
                 scrollPanelMain.setViewportView(tableMain);
             }

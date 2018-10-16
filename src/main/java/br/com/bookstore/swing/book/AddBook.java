@@ -13,12 +13,9 @@ import br.com.bookstore.util.MessageUtil;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.text.DefaultFormatterFactory;
@@ -31,6 +28,7 @@ public class AddBook extends JFrame {
 
     Map<Integer, Integer> publisherIds = new HashMap<>();
     Map<Integer, Integer> authorIds = new HashMap<>();
+    ResourceBundle currency = ResourceBundle.getBundle("currency");
 
     public AddBook() {
         initComponents();
@@ -82,8 +80,7 @@ public class AddBook extends JFrame {
     }
 
     private void setUpFormat() {
-        //DecimalFormat decimal = new DecimalFormat("########.00");
-        DecimalFormat decimal = new DecimalFormat("########,00");
+        DecimalFormat decimal = new DecimalFormat(currency.getString("pattern"));
         NumberFormatter numberFormatter = new NumberFormatter(decimal);
         numberFormatter.setFormat(decimal);
         numberFormatter.setAllowsInvalid(false);
@@ -235,15 +232,6 @@ public class AddBook extends JFrame {
 
         //======== panel1 ========
         {
-
-            // JFormDesigner evaluation mark
-            panel1.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
-
             //---- lblISBN ----
             lblISBN.setText("ISBN");
 

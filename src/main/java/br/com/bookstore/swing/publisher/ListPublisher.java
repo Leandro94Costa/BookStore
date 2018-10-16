@@ -105,8 +105,8 @@ public class ListPublisher extends JFrame {
 
             ButtonColumn buttonColumnEdit = new ButtonColumn(tablePublisher, actionEdit, 2);
             ButtonColumn buttonColumnRemove = new ButtonColumn(tablePublisher, actionRemove, 3);
-            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);    //Atalho D
-            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);  //Atalho E
+            buttonColumnEdit.setMnemonic(KeyEvent.VK_D);
+            buttonColumnRemove.setMnemonic(KeyEvent.VK_E);
         } catch (Exception e) {
             e.printStackTrace();
             MessageUtil.addMessage(ListPublisher.this, e.getMessage());
@@ -141,16 +141,6 @@ public class ListPublisher extends JFrame {
 
         //======== panelPublisher ========
         {
-
-            // JFormDesigner evaluation mark
-            panelPublisher.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                    java.awt.Color.red), panelPublisher.getBorder())); panelPublisher.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
-
-            //======== scrollPanelPublisher ========
             {
                 scrollPanelPublisher.setViewportView(tablePublisher);
             }
