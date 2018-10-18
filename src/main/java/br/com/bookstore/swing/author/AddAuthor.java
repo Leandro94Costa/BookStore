@@ -35,7 +35,8 @@ public class AddAuthor extends JFrame {
     }
 
     private void btnSaveActionPerformed(ActionEvent e) {
-        if (!"".equals(txtName.getText()) && !"".equals(txtSurname.getText())) {
+        if (!"".equals(txtName.getText()) && !"".equals(txtSurname.getText())
+                && (txtName.getText().length() <= 25 && txtSurname.getText().length() <= 25)) {
             Integer id = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             Author author = new Author(id, txtName.getText(), txtSurname.getText());
             AuthorService service = new AuthorService();
@@ -48,19 +49,25 @@ public class AddAuthor extends JFrame {
                 MessageUtil.addMessage(AddAuthor.this, e1.getMessage());
             }
         } else {
-            if (!"".equals(txtSurname.getText())) {
+            if ("".equals(txtName.getText())) {
                 MessageUtil.addMessage(AddAuthor.this, "Campo NOME obrigatório");
-            } else if (!"".equals(txtName.getText())) {
+            } else if ("".equals(txtSurname.getText())) {
                 MessageUtil.addMessage(AddAuthor.this, "Campo SOBRENOME obrigatório");
-            } else {
+            } else if ("".equals(txtName.getText()) && "".equals(txtSurname.getText())){
                 MessageUtil.addMessage(AddAuthor.this, "Campos NOME e SOBRENOME obrigatórios");
+            }
+            if (txtName.getText().length() > 25) {
+                MessageUtil.addMessage(AddAuthor.this, "Campo NOME deve ter no máximo 25 caracteres");
+            }
+            if (txtSurname.getText().length() > 25) {
+                MessageUtil.addMessage(AddAuthor.this, "Campo SOBRENOME deve ter no máximo 25 caracteres");
             }
         }
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         lblName = new JLabel();
         txtName = new JTextField();
         txtSurname = new JTextField();
@@ -71,6 +78,8 @@ public class AddAuthor extends JFrame {
 
         //======== this ========
         setTitle("Adicionar autor");
+        setResizable(false);
+        setIconImage(null);
         Container contentPane = getContentPane();
 
         //---- lblName ----
@@ -125,7 +134,7 @@ public class AddAuthor extends JFrame {
                         .addComponent(btnSave))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtId)
-                    .addContainerGap(48, Short.MAX_VALUE))
+                    .addContainerGap(46, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -133,7 +142,7 @@ public class AddAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JLabel lblName;
     private JTextField txtName;
     private JTextField txtSurname;

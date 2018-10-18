@@ -35,7 +35,7 @@ public class AddPublisher extends JFrame {
     }
 
     private void btnSaveActionPerformed(ActionEvent e) {
-        if (!"".equals(txtName.getText())) {
+        if (!"".equals(txtName.getText()) && txtName.getText().length() <= 30 && txtURL.getText().length() <= 80) {
             Integer idPublisher = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             String urlPublisher = !"".equals(txtURL.getText()) ? txtURL.getText() : null;
             Publisher publisher = new Publisher(idPublisher, txtName.getText(), urlPublisher);
@@ -49,13 +49,19 @@ public class AddPublisher extends JFrame {
                 MessageUtil.addMessage(AddPublisher.this, e1.getMessage());
             }
         } else {
-            MessageUtil.addMessage(AddPublisher.this, "Campo NOME obrigatório");
+            if ("".equals(txtName.getText())) {
+                MessageUtil.addMessage(AddPublisher.this, "Campo NOME obrigatório");
+            } else if (txtName.getText().length() > 30) {
+                MessageUtil.addMessage(AddPublisher.this, "Campo NOME deve conter até 30 caracteres");
+            } else {
+                MessageUtil.addMessage(AddPublisher.this, "Campo URL deve conter até 80 caracteres");
+            }
         }
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         txtName = new JTextField();
         lblURL = new JLabel();
         txtURL = new JTextField();
@@ -66,6 +72,7 @@ public class AddPublisher extends JFrame {
 
         //======== this ========
         setTitle("Adicionar editora");
+        setResizable(false);
         Container contentPane = getContentPane();
 
         //---- lblURL ----
@@ -120,7 +127,7 @@ public class AddPublisher extends JFrame {
                         .addComponent(btnCancel)
                         .addComponent(btnSave)
                         .addComponent(txtId))
-                    .addContainerGap(41, Short.MAX_VALUE))
+                    .addContainerGap(39, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -128,7 +135,7 @@ public class AddPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JTextField txtName;
     private JLabel lblURL;
     private JTextField txtURL;

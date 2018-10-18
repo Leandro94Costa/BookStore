@@ -146,6 +146,8 @@ public class Main extends JFrame {
 
         //======== this ========
         setTitle("Livros");
+        setIconImage(null);
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -171,6 +173,7 @@ public class Main extends JFrame {
 
         //======== panelMain ========
         {
+            //======== scrollPanelMain ========
             {
                 scrollPanelMain.setViewportView(tableMain);
             }

@@ -131,6 +131,7 @@ public class ListPublisher extends JFrame {
 
         //======== this ========
         setTitle("Editoras");
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -141,6 +142,7 @@ public class ListPublisher extends JFrame {
 
         //======== panelPublisher ========
         {
+            //======== scrollPanelPublisher ========
             {
                 scrollPanelPublisher.setViewportView(tablePublisher);
             }

@@ -10,9 +10,10 @@ public class Book {
     @Id
     private Long isbn;
 
+    @Column(length = 60, nullable = false)
     private String title;
 
-    @Column(length = 10, precision = 2)
+    @Column(length = 10, precision = 2, nullable = false)
     private Float price;
 
     @ManyToOne(fetch = FetchType.EAGER)

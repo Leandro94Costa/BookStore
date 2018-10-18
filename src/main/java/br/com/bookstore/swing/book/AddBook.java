@@ -210,7 +210,7 @@ public class AddBook extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panel1 = new JPanel();
         lblISBN = new JLabel();
         lblTitle = new JLabel();
@@ -228,6 +228,7 @@ public class AddBook extends JFrame {
 
         //======== this ========
         setTitle("Adicionar livro");
+        setResizable(false);
         Container contentPane = getContentPane();
 
         //======== panel1 ========
@@ -332,7 +333,7 @@ public class AddBook extends JFrame {
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancel)
                             .addComponent(btnSave))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addContainerGap(30, Short.MAX_VALUE))
             );
         }
 
@@ -352,7 +353,7 @@ public class AddBook extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panel1;
     private JLabel lblISBN;
     private JLabel lblTitle;

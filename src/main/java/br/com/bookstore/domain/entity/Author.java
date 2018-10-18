@@ -12,9 +12,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "fname")
+    @Column(name = "fname", length = 25, nullable = false)
     private String firstName;
 
+    @Column(length = 25, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "authors")

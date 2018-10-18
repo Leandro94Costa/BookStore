@@ -132,6 +132,7 @@ public class ListAuthor extends JFrame {
 
         //======== this ========
         setTitle("Autores");
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -142,6 +143,7 @@ public class ListAuthor extends JFrame {
 
         //======== panelAuthor ========
         {
+            //======== scrollPanelAuthor ========
             {
                 scrollPanelAuthor.setViewportView(tableAuthor);
             }
