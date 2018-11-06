@@ -36,7 +36,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>br.com.bookstore.swing.Main</mainClass>
+                            <mainClass>br.com.bookstore.view.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
