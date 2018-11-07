@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -12,8 +12,8 @@ new FormModel {
 			"resizable": false
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowOpened", "thisWindowOpened", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l:::p {comp scrollPanelAuthor:::p:787:p, seq {comp buttonAdd:::p::p, space :::x, comp buttonRefresh:::p::p}}, space :::x}}"
-				"$verticalGroup": "par l {seq t {space :::p, par t {comp buttonAdd:::p:40:p, comp buttonRefresh:::p:40:p}, space :::p, comp scrollPanelAuthor::::410:x, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l:::p {comp scrollPanelAuthor:::p:787:p, seq {comp buttonAdd:::p::p, space s:::p, comp txtSearch:::::x, space u:::p, comp buttonSearch:::p::p, space s:::p, comp buttonRefresh:::p::p}}, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :::p, par t {par b {comp buttonAdd::b:p:40:p, comp buttonSearch::b:p::p, comp txtSearch::b:p::p}, comp buttonRefresh:::p:40:p}, space :::p, comp scrollPanelAuthor::::410:x, space :::p}}"
 			} ) {
 				name: "panelAuthor"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -32,6 +32,14 @@ new FormModel {
 					name: "buttonRefresh"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/Refresh32.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "txtSearch"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonSearch"
+					"text": "Pesquisar"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSearchActionPerformed", true ) )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

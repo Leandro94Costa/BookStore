@@ -11,8 +11,11 @@ public class PublisherController {
     PublisherDAO dao = new PublisherDAO();
 
     public String[][] getAll(List<Integer> publisherIds) throws Exception {
+        return fillPublisher(dao.getAll(), publisherIds);
+    }
+
+    private String[][] fillPublisher(List<Publisher> publisherList, List<Integer> publisherIds) throws Exception {
         int numColumns = 4;
-        List<Publisher> publisherList = dao.getAll();
         String[][] publishers = new String[publisherList.size()][numColumns];
         for (int i = 0; i < publisherList.size(); i++) {
             Publisher publisher = publisherList.get(i);
@@ -54,5 +57,9 @@ public class PublisherController {
 
     public boolean hasBooks(Integer id) {
         return dao.hasBooks(id);
+    }
+
+    public String[][] search(String name, List<Integer> publisherIds) throws Exception {
+        return fillPublisher(dao.findByName(name), publisherIds);
     }
 }

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -12,8 +12,8 @@ new FormModel {
 			"resizable": false
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowOpened", "thisWindowOpened", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, par l {comp scrollPanelPublisher::::786:x, seq {comp buttonAdd:::p::p, space ::595:x, comp buttonRefresh:::p::p}}, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::p, par l {comp buttonAdd:::p:40:p, comp buttonRefresh:::p:40:p}, space :::p, comp scrollPanelPublisher::::410:x, space :::p}}"
+				"$horizontalGroup": "par l {seq l {space :::p, par l {comp scrollPanelPublisher::::786:x, seq {comp buttonAdd:::p::p, space s:::p, comp txtSearch::::461:x, space s:::p, comp buttonSearch:::p::p, space s:::p, comp buttonRefresh:::p::p}}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {par b {comp buttonAdd::b:p:40:p, comp buttonSearch::b:p::p, comp txtSearch::b:p::p}, comp buttonRefresh:::p:40:p}, space :::p, comp scrollPanelPublisher::::410:x, space :::p}}"
 			} ) {
 				name: "panelPublisher"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -33,6 +33,14 @@ new FormModel {
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/Refresh32.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonRefreshActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "txtSearch"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonSearch"
+					"text": "Pesquisar"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSearchActionPerformed", true ) )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

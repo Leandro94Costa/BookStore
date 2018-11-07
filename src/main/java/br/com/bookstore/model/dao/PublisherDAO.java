@@ -91,4 +91,19 @@ public class PublisherDAO implements GenericDAO<Publisher, Integer> {
             entityManager.close();
         }
     }
+
+    public List<Publisher> findByName(String name) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        List<Publisher> publishers;
+        try {
+            publishers = entityManager.createQuery("select p from Publisher p where p.name like :name")
+                    .setParameter("name", "%" + name + "%")
+                    .getResultList();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return publishers;
+    }
 }

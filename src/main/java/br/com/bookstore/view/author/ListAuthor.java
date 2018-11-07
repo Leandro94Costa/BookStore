@@ -46,15 +46,23 @@ public class ListAuthor extends JFrame {
 
     private JScrollPane getScrollPanelAuthor() {
         authorIds = new ArrayList<>();
-        scrollPanelAuthor.setViewportView(getTableAuthor());
+        scrollPanelAuthor.setViewportView(getTableAuthor(null));
         return scrollPanelAuthor;
     }
 
-    private JTable getTableAuthor() {
+    private JScrollPane getScrollPanelAuthor(String[][] authors) {
+        authorIds = new ArrayList<>();
+        scrollPanelAuthor.setViewportView(getTableAuthor(authors));
+        return scrollPanelAuthor;
+    }
+
+    private JTable getTableAuthor(String[][] authors) {
         AuthorController authorController = new AuthorController();
         String[] header = {"Nome", "Sobrenome", "", ""};
         try {
-            String[][] authors = authorController.getAll(authorIds);
+            if (authors == null) {
+                authors = authorController.getAll(authorIds);
+            }
             TableModel tableModelAuthor = new DefaultTableModel(authors, header);
             tableAuthor = new JTable();
             tableAuthor.setModel(tableModelAuthor);
@@ -121,14 +129,29 @@ public class ListAuthor extends JFrame {
         addAuthor.setVisible(true);
     }
 
+    private void buttonSearchActionPerformed(ActionEvent e) {
+        if (!"".equals(txtSearch.getText())) {
+            AuthorController authorController = new AuthorController();
+            try {
+                getScrollPanelAuthor(authorController.search(txtSearch.getText(), authorIds));
+            } catch (Exception e1) {
+                MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
+            }
+        } else {
+            MessageUtil.addMessage(ListAuthor.this, "Favor digitar o nome do autor");
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
         buttonAdd = new JButton();
         buttonRefresh = new JButton();
+        txtSearch = new JTextField();
+        buttonSearch = new JButton();
 
         //======== this ========
         setTitle("Autores");
@@ -143,6 +166,15 @@ public class ListAuthor extends JFrame {
 
         //======== panelAuthor ========
         {
+
+            // JFormDesigner evaluation mark
+            panelAuthor.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panelAuthor.getBorder())); panelAuthor.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+
             //======== scrollPanelAuthor ========
             {
                 scrollPanelAuthor.setViewportView(tableAuthor);
@@ -157,6 +189,10 @@ public class ListAuthor extends JFrame {
             buttonRefresh.setIcon(new ImageIcon(getClass().getResource("/icons/Refresh32.png")));
             buttonRefresh.addActionListener(e -> buttonRefreshActionPerformed(e));
 
+            //---- buttonSearch ----
+            buttonSearch.setText("Pesquisar");
+            buttonSearch.addActionListener(e -> buttonSearchActionPerformed(e));
+
             GroupLayout panelAuthorLayout = new GroupLayout(panelAuthor);
             panelAuthor.setLayout(panelAuthorLayout);
             panelAuthorLayout.setHorizontalGroup(
@@ -167,7 +203,11 @@ public class ListAuthor extends JFrame {
                             .addComponent(scrollPanelAuthor, GroupLayout.PREFERRED_SIZE, 787, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelAuthorLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSearch)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonSearch)
+                                .addGap(18, 18, 18)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
@@ -176,7 +216,10 @@ public class ListAuthor extends JFrame {
                     .addGroup(GroupLayout.Alignment.TRAILING, panelAuthorLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelAuthorLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelAuthorLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonSearch)
+                                .addComponent(txtSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                             .addComponent(buttonRefresh, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPanelAuthor, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
@@ -204,11 +247,13 @@ public class ListAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;
     private JButton buttonAdd;
     private JButton buttonRefresh;
+    private JTextField txtSearch;
+    private JButton buttonSearch;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

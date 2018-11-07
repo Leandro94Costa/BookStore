@@ -46,15 +46,23 @@ public class ListPublisher extends JFrame {
 
     private JScrollPane getScrollPanelPublisher() {
         publisherIds = new ArrayList<>();
-        scrollPanelPublisher.setViewportView(getTablePublisher());
+        scrollPanelPublisher.setViewportView(getTablePublisher(null));
         return scrollPanelPublisher;
     }
 
-    private JTable getTablePublisher() {
+    private JScrollPane getScrollPanelPublisher(String[][] publishers) {
+        publisherIds = new ArrayList<>();
+        scrollPanelPublisher.setViewportView(getTablePublisher(publishers));
+        return scrollPanelPublisher;
+    }
+
+    private JTable getTablePublisher(String[][] publishers) {
         PublisherController publisherController = new PublisherController();
         String[] header = {"Nome", "URL", "", ""};
         try {
-            String[][] publishers = publisherController.getAll(publisherIds);
+            if (publishers == null) {
+                publishers = publisherController.getAll(publisherIds);
+            }
             TableModel tableModelPublisher = new DefaultTableModel(publishers, header);
             tablePublisher = new JTable();
             tablePublisher.setModel(tableModelPublisher);
@@ -120,14 +128,29 @@ public class ListPublisher extends JFrame {
         addPublisher.setVisible(true);
     }
 
+    private void buttonSearchActionPerformed(ActionEvent e) {
+        if (!"".equals(txtSearch.getText())) {
+            PublisherController publisherController = new PublisherController();
+            try {
+                getScrollPanelPublisher(publisherController.search(txtSearch.getText(), publisherIds));
+            } catch (Exception e1) {
+                MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
+            }
+        } else {
+            MessageUtil.addMessage(ListPublisher.this, "Favor digitar o nome da editora");
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
         buttonAdd = new JButton();
         buttonRefresh = new JButton();
+        txtSearch = new JTextField();
+        buttonSearch = new JButton();
 
         //======== this ========
         setTitle("Editoras");
@@ -142,6 +165,15 @@ public class ListPublisher extends JFrame {
 
         //======== panelPublisher ========
         {
+
+            // JFormDesigner evaluation mark
+            panelPublisher.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panelPublisher.getBorder())); panelPublisher.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+
             //======== scrollPanelPublisher ========
             {
                 scrollPanelPublisher.setViewportView(tablePublisher);
@@ -159,6 +191,10 @@ public class ListPublisher extends JFrame {
 			buttonRefreshActionPerformed(e);
 		});
 
+            //---- buttonSearch ----
+            buttonSearch.setText("Pesquisar");
+            buttonSearch.addActionListener(e -> buttonSearchActionPerformed(e));
+
             GroupLayout panelPublisherLayout = new GroupLayout(panelPublisher);
             panelPublisher.setLayout(panelPublisherLayout);
             panelPublisherLayout.setHorizontalGroup(
@@ -169,7 +205,11 @@ public class ListPublisher extends JFrame {
                             .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                             .addGroup(panelPublisherLayout.createSequentialGroup()
                                 .addComponent(buttonAdd)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSearch, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonSearch)
+                                .addGap(18, 18, 18)
                                 .addComponent(buttonRefresh)))
                         .addContainerGap())
             );
@@ -178,7 +218,10 @@ public class ListPublisher extends JFrame {
                     .addGroup(panelPublisherLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelPublisherLayout.createParallelGroup()
-                            .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelPublisherLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonSearch)
+                                .addComponent(txtSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                             .addComponent(buttonRefresh, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPanelPublisher, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
@@ -202,11 +245,13 @@ public class ListPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;
     private JButton buttonAdd;
     private JButton buttonRefresh;
+    private JTextField txtSearch;
+    private JButton buttonSearch;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -11,8 +11,7 @@ public class BookController {
     BookDAO dao = new BookDAO();
 
     public String[][] getAll(List<Long> bookIds) throws Exception {
-        List<Book> bookList = dao.getAll();
-        return fillBooks(bookList, bookIds);
+        return fillBooks(dao.getAll(), bookIds);
     }
 
     private String[][] fillBooks(List<Book> bookList, List<Long> bookIds) throws Exception {
@@ -85,22 +84,18 @@ public class BookController {
     }
 
     private String[][] searchByISBN(String search, List<Long> bookIds) throws Exception {
-        List<Book> books = dao.findByISBN(Long.valueOf(search));
-        return fillBooks(books, bookIds);
+        return fillBooks(dao.findByISBN(Long.valueOf(search)), bookIds);
     }
 
     private String[][] searchByTitle(String search, List<Long> bookIds) throws Exception {
-        List<Book> books = dao.findByTitle(search);
-        return fillBooks(books, bookIds);
+        return fillBooks(dao.findByTitle(search), bookIds);
     }
 
     private String[][] searchByAuthor(String search, List<Long> bookIds) throws Exception {
-        List<Book> books = dao.findByAuthor(search);
-        return fillBooks(books, bookIds);
+        return fillBooks(dao.findByAuthor(search), bookIds);
     }
 
     private String[][] searchByPublisher(String search, List<Long> bookIds) throws Exception {
-        List<Book> books = dao.findByPublisher(search);
-        return fillBooks(books, bookIds);
+        return fillBooks(dao.findByPublisher(search), bookIds);
     }
 }

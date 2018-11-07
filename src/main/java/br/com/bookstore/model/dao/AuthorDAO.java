@@ -107,4 +107,25 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
             entityManager.close();
         }
     }
+
+    public List<Author> findByName(String name) throws Exception {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        List<Author> authors;
+        try {
+            if (!name.contains(" ")) {
+                authors = entityManager.createQuery("select a from Author a where a.firstName like :name or a.name like :name")
+                        .setParameter("name", "%" + name + "%")
+                        .getResultList();
+            } else {
+                authors = entityManager.createQuery("select a from Author a where concat(a.firstName, ' ', a.name) like :name")
+                        .setParameter("name", "%" + name + "%")
+                        .getResultList();
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return authors;
+    }
 }

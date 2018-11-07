@@ -12,8 +12,11 @@ public class AuthorController {
     AuthorDAO dao = new AuthorDAO();
 
     public String[][] getAll(List<Integer> authorIds) throws Exception {
+        return fillAuthor(dao.getAll(), authorIds);
+    }
+
+    private String[][] fillAuthor(List<Author> authorList, List<Integer> authorIds) throws Exception {
         int numColumns = 4;
-        List<Author> authorList = dao.getAll();
         String[][] authors = new String[authorList.size()][numColumns];
         for (int i = 0; i < authorList.size(); i++) {
             Author author = authorList.get(i);
@@ -67,5 +70,9 @@ public class AuthorController {
 
     public boolean hasBooks(Integer id) {
         return dao.hasBooks(id);
+    }
+
+    public String[][] search(String name, List<Integer> authorIds) throws Exception {
+        return fillAuthor(dao.findByName(name), authorIds);
     }
 }
