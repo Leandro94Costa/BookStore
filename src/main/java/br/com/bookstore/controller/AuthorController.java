@@ -72,6 +72,21 @@ public class AuthorController {
         return dao.hasBooks(id);
     }
 
+    public String validate(Author author) {
+        String validation = null;
+        if ("".equals(author.getFirstName())) {
+            validation = "Campo NOME obrigatório";
+        } else if (author.getFirstName().length() > 25) {
+            validation = "Campo NOME deve conter até 25 caracteres";
+        }
+        if ("".equals(author.getName())) {
+            validation = "Campo SOBRENOME obrigatório";
+        } else if (author.getName().length() > 25) {
+            validation = "Campo SOBRENOME deve conter até 25 caracteres";
+        }
+        return validation;
+    }
+
     public String[][] search(String name, List<Integer> authorIds) throws Exception {
         return fillAuthor(dao.findByName(name), authorIds);
     }

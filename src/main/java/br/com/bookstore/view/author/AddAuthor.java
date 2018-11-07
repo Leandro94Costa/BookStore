@@ -35,33 +35,20 @@ public class AddAuthor extends JFrame {
     }
 
     private void btnSaveActionPerformed(ActionEvent e) {
-        if (!"".equals(txtName.getText()) && !"".equals(txtSurname.getText())
-                && (txtName.getText().length() <= 25 && txtSurname.getText().length() <= 25)) {
+        AuthorController controller = new AuthorController();
+        try {
             Integer id = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             Author author = new Author(id, txtName.getText(), txtSurname.getText());
-            AuthorController service = new AuthorController();
-            try {
-                service.save(author);
+            String validation = controller.validate(author);
+            if (validation == null) {
+                controller.save(author);
                 MessageUtil.addMessage(AddAuthor.this, "Autor salvo com sucesso");
                 dispose();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                MessageUtil.addMessage(AddAuthor.this, e1.getMessage());
+            } else {
+                MessageUtil.addMessage(AddAuthor.this, validation);
             }
-        } else {
-            if ("".equals(txtName.getText())) {
-                MessageUtil.addMessage(AddAuthor.this, "Campo NOME obrigatório");
-            } else if ("".equals(txtSurname.getText())) {
-                MessageUtil.addMessage(AddAuthor.this, "Campo SOBRENOME obrigatório");
-            } else if ("".equals(txtName.getText()) && "".equals(txtSurname.getText())){
-                MessageUtil.addMessage(AddAuthor.this, "Campos NOME e SOBRENOME obrigatórios");
-            }
-            if (txtName.getText().length() > 25) {
-                MessageUtil.addMessage(AddAuthor.this, "Campo NOME deve ter no máximo 25 caracteres");
-            }
-            if (txtSurname.getText().length() > 25) {
-                MessageUtil.addMessage(AddAuthor.this, "Campo SOBRENOME deve ter no máximo 25 caracteres");
-            }
+        } catch (Exception e1) {
+            MessageUtil.addMessage(AddAuthor.this, e1.getMessage());
         }
     }
 

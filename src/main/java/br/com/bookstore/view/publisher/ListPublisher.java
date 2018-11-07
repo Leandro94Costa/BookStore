@@ -75,7 +75,6 @@ public class ListPublisher extends JFrame {
                         Publisher publisher = publisherController.getById(publisherIds.get(row));
                         editPublisher(publisher);
                     } catch (Exception e1) {
-                        e1.printStackTrace();
                         MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
                     }
                 }
@@ -92,19 +91,21 @@ public class ListPublisher extends JFrame {
                             if (!publisherController.hasBooks(publisherIds.get(row))) {
                                 publisherController.delete(publisherIds.get(row));
                                 ((DefaultTableModel) table.getModel()).removeRow(row);
+                                publisherIds.remove(row);
                                 MessageUtil.addMessage(ListPublisher.this, "Editora removida com sucesso!");
                             } else {
-                                response = JOptionPane.showConfirmDialog(ListPublisher.this, "Editora com livros salvos, deseja remover os livros e a editora?");
+                                response = JOptionPane.showConfirmDialog(ListPublisher.this,
+                                        "Editora com livros salvos, deseja remover os livros e a editora?");
                                 if (response == 0) {
                                     BookController bookController = new BookController();
                                     bookController.deleteByPublisher(publisherIds.get(row));
                                     publisherController.delete(publisherIds.get(row));
                                     ((DefaultTableModel) table.getModel()).removeRow(row);
+                                    publisherIds.remove(row);
                                     MessageUtil.addMessage(ListPublisher.this, "Editora e livros removidos com sucesso!");
                                 }
                             }
                         } catch (Exception e1) {
-                            e1.printStackTrace();
                             MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
                         }
                     }
@@ -116,7 +117,6 @@ public class ListPublisher extends JFrame {
             buttonColumnEdit.setMnemonic(KeyEvent.VK_D);
             buttonColumnRemove.setMnemonic(KeyEvent.VK_E);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtil.addMessage(ListPublisher.this, e.getMessage());
         }
         return tablePublisher;

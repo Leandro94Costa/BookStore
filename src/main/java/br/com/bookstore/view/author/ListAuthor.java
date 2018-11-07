@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
- * @author Leandro
+ * @author Leandro Costa
  */
 public class ListAuthor extends JFrame {
 
@@ -75,7 +75,6 @@ public class ListAuthor extends JFrame {
                         Author author = authorController.getById(authorIds.get(row));
                         editAuthor(author);
                     } catch (Exception e1) {
-                        e1.printStackTrace();
                         MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
                     }
                 }
@@ -92,6 +91,7 @@ public class ListAuthor extends JFrame {
                             if (!authorController.hasBooks(authorIds.get(row))) {
                                 authorController.delete(authorIds.get(row));
                                 ((DefaultTableModel) table.getModel()).removeRow(row);
+                                authorIds.remove(row);
                                 MessageUtil.addMessage(ListAuthor.this, "Autor removido com sucesso!");
                             } else {
                                 response = JOptionPane.showConfirmDialog(ListAuthor.this,
@@ -101,11 +101,11 @@ public class ListAuthor extends JFrame {
                                     bookController.deleteByAuthor(authorIds.get(row));
                                     authorController.delete(authorIds.get(row));
                                     ((DefaultTableModel) table.getModel()).removeRow(row);
+                                    authorIds.remove(row);
                                     MessageUtil.addMessage(ListAuthor.this, "Autor e livros removidos com sucesso!");
                                 }
                             }
                         } catch (Exception e1) {
-                            e1.printStackTrace();
                             MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
                         }
                     }
@@ -117,7 +117,6 @@ public class ListAuthor extends JFrame {
             buttonColumnEdit.setMnemonic(KeyEvent.VK_D);
             buttonColumnRemove.setMnemonic(KeyEvent.VK_E);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtil.addMessage(ListAuthor.this, e.getMessage());
         }
         return tableAuthor;

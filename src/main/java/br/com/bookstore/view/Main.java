@@ -106,7 +106,6 @@ public class Main extends JFrame {
                         Book book = bookController.getById(bookIds.get(row));
                         editBook(book);
                     } catch (Exception e1) {
-                        e1.printStackTrace();
                         MessageUtil.addMessage(Main.this, e1.getMessage());
                     }
                 }
@@ -122,9 +121,9 @@ public class Main extends JFrame {
                         ((DefaultTableModel) table.getModel()).removeRow(row);
                         try {
                             bookController.delete(bookIds.get(row));
+                            bookIds.remove(row);
                             MessageUtil.addMessage(Main.this, "Livro removido com sucesso!");
                         } catch (Exception e1) {
-                            e1.printStackTrace();
                             MessageUtil.addMessage(Main.this, e1.getMessage());
                         }
                     }
@@ -136,7 +135,6 @@ public class Main extends JFrame {
             buttonColumnEdit.setMnemonic(KeyEvent.VK_D);
             buttonColumnRemove.setMnemonic(KeyEvent.VK_E);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtil.addMessage(Main.this, e.getMessage());
         }
         return tableMain;
