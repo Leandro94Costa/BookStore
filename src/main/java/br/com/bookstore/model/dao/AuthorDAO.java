@@ -36,7 +36,7 @@ public class AuthorDAO implements GenericDAO<Author, Integer> {
         return author;
     }
 
-    public List<Author> getAuthorsByBook(Long id) throws Exception {
+    public List<Author> getAuthorsByBook(String id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         List<Author> authors;
         try {

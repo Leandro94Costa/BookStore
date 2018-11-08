@@ -10,11 +10,11 @@ public class BookController {
 
     BookDAO dao = new BookDAO();
 
-    public String[][] getAll(List<Long> bookIds) throws Exception {
+    public String[][] getAll(List<String> bookIds) throws Exception {
         return fillBooks(dao.getAll(), bookIds);
     }
 
-    private String[][] fillBooks(List<Book> bookList, List<Long> bookIds) throws Exception {
+    private String[][] fillBooks(List<Book> bookList, List<String> bookIds) throws Exception {
         int numColumns = 7;
         String[][] books = new String[bookList.size()][numColumns];
         for (int i = 0; i < bookList.size(); i++) {
@@ -44,7 +44,7 @@ public class BookController {
         return authorsConcat;
     }
 
-    public Book getById(Long id) throws Exception {
+    public Book getById(String id) throws Exception {
         return dao.getById(id);
     }
 
@@ -56,7 +56,7 @@ public class BookController {
         }
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(String id) throws Exception {
         dao.delete(id);
     }
 
@@ -69,7 +69,7 @@ public class BookController {
         dao.deleteByAuthor(ids);
     }
 
-    public String[][] search(int searchIndex, String search, List<Long> bookIds) throws Exception {
+    public String[][] search(int searchIndex, String search, List<String> bookIds) throws Exception {
         switch (searchIndex) {
             case 0: return searchByISBN(search, bookIds);
 
@@ -83,19 +83,50 @@ public class BookController {
         }
     }
 
-    private String[][] searchByISBN(String search, List<Long> bookIds) throws Exception {
+    private String[][] searchByISBN(String search, List<String> bookIds) throws Exception {
         return fillBooks(dao.findByISBN(Long.valueOf(search)), bookIds);
     }
 
-    private String[][] searchByTitle(String search, List<Long> bookIds) throws Exception {
+    private String[][] searchByTitle(String search, List<String> bookIds) throws Exception {
         return fillBooks(dao.findByTitle(search), bookIds);
     }
 
-    private String[][] searchByAuthor(String search, List<Long> bookIds) throws Exception {
+    private String[][] searchByAuthor(String search, List<String> bookIds) throws Exception {
         return fillBooks(dao.findByAuthor(search), bookIds);
     }
 
-    private String[][] searchByPublisher(String search, List<Long> bookIds) throws Exception {
+    private String[][] searchByPublisher(String search, List<String> bookIds) throws Exception {
         return fillBooks(dao.findByPublisher(search), bookIds);
+    }
+
+    public String validate(Book book) {
+        String validation = null;
+
+        if ("".equals(book.getIsbn())) {
+            validation = "Campo ISBN obrigatório";
+        } else if (book.getIsbn().length() != 10 && book.getIsbn().length() != 13) {
+            validation = "Campo ISBN deve conter 10 ou 13 dígitos";
+        }
+
+        if ("".equals(book.getTitle())) {
+            validation = "Campo TÍTULO obrigatório";
+        } else if (book.getTitle().length() > 60) {
+            validation = "Campo TÍTULO deve ter até 60 caracteres";
+        }
+
+        if ("".equals(book.getPrice())) {
+            validation = "Campo PREÇO obrigatório";
+        } else if (book.getPrice() <= 0 || book.getPrice() > 9999999.99) {
+            validation = "Campo PREÇO deve ser entre 0,01 e 9999999,99";
+        }
+
+        if (book.getPublisher() == null) {
+            validation = "Editora obrigatória";
+        }
+        if (book.getAuthors() == null) {
+            validation = "Autor obrigatória";
+        }
+
+        return validation;
     }
 }

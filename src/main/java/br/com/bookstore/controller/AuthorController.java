@@ -64,7 +64,7 @@ public class AuthorController {
         dao.delete(id);
     }
 
-    public List<Author> getAuthorsByBook(Long id) throws Exception {
+    public List<Author> getAuthorsByBook(String id) throws Exception {
         return dao.getAuthorsByBook(id);
     }
 

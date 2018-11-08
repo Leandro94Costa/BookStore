@@ -26,7 +26,7 @@ import javax.swing.table.TableModel;
  */
 public class Main extends JFrame {
 
-    private List<Long> bookIds;
+    private List<String> bookIds;
 
     public Main() {
         initComponents();
@@ -76,13 +76,13 @@ public class Main extends JFrame {
     }
 
     private JScrollPane getScrollPane() {
-        bookIds = new ArrayList<>();
+        bookIds = new ArrayList<String>();
         scrollPanelMain.setViewportView(getTableMain(null));
         return scrollPanelMain;
     }
 
     private JScrollPane getScrollPane(String[][] books) {
-        bookIds = new ArrayList<>();
+        bookIds = new ArrayList<String>();
         scrollPanelMain.setViewportView(getTableMain(books));
         return scrollPanelMain;
     }

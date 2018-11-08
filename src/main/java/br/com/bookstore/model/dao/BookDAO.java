@@ -6,7 +6,7 @@ import br.com.bookstore.util.JpaUtil;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class BookDAO implements GenericDAO<Book, Long> {
+public class BookDAO implements GenericDAO<Book, String> {
 
     @Override
     public List<Book> getAll() throws Exception {
@@ -23,7 +23,7 @@ public class BookDAO implements GenericDAO<Book, Long> {
     }
 
     @Override
-    public Book getById(Long id) throws Exception {
+    public Book getById(String id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         Book book;
         try {
@@ -82,7 +82,7 @@ public class BookDAO implements GenericDAO<Book, Long> {
     }
 
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(String id) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         try {
             entityManager.getTransaction().begin();

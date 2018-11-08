@@ -22,7 +22,7 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
 /**
- * @author Leandro
+ * @author Leandro Costa
  */
 public class AddBook extends JFrame {
 
@@ -96,18 +96,21 @@ public class AddBook extends JFrame {
         PublisherController publisherController = new PublisherController();
         AuthorController authorController = new AuthorController();
         BookController bookController = new BookController();
-        if (validateFields()) {
-            try {
-                Book book = new Book(Long.valueOf(txtISBN.getText()), txtTitle.getText(), Float.valueOf(txtPrice.getText()),
-                        publisherController.getById(publisherIds.get(cbxPublisher.getSelectedIndex())),
-                        authorController.getAuthorsById(getAuthorIds(listAuthor.getSelectedIndices())));
-                bookController.save(book);
-                MessageUtil.addMessage(AddBook.this, "Livro salvo com sucesso");
-                dispose();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                MessageUtil.addMessage(AddBook.this, e1.getMessage());
+        try {
+            Book book = new Book(txtISBN.getText(), txtTitle.getText(), Float.valueOf(txtPrice.getText()),
+                    publisherController.getById(publisherIds.get(cbxPublisher.getSelectedIndex())),
+                    authorController.getAuthorsById(getAuthorIds(listAuthor.getSelectedIndices())));
+
+            String validation = bookController.validate(book);
+            if (validation == null) {
+                    bookController.save(book);
+                    MessageUtil.addMessage(AddBook.this, "Livro salvo com sucesso");
+                    dispose();
+            } else {
+                MessageUtil.addMessage(AddBook.this, validation);
             }
+        } catch (Exception e1) {
+            MessageUtil.addMessage(AddBook.this, e1.getMessage());
         }
     }
 
@@ -117,48 +120,6 @@ public class AddBook extends JFrame {
             ids.add(authorIds.get(index));
         }
         return ids;
-    }
-
-    private boolean validateFields() {
-        boolean valid = true;
-        if (!"".equals(txtISBN.getText())) {
-            if (txtISBN.getText().length() > 20) {
-                MessageUtil.addMessage(AddBook.this, "Campo ISBN tamanho máximo 20 dígitos");
-                valid = false;
-            }
-        } else {
-            MessageUtil.addMessage(AddBook.this, "Campo ISBN obrigatório");
-            valid = false;
-        }
-        if (!"".equals(txtPrice.getText())) {
-            if (txtPrice.getText().length() > 11) {
-                MessageUtil.addMessage(AddBook.this, "Campo PREÇO tamanho máximo 10 dígitos");
-                valid = false;
-            }
-        } else {
-            MessageUtil.addMessage(AddBook.this, "Campo PREÇO obrigatório");
-            valid = false;
-        }
-        if (!"".equals(txtTitle.getText())) {
-            if (txtTitle.getText().length() > 60) {
-                MessageUtil.addMessage(AddBook.this, "Campo TÍTULO tamanho máximo 60 caracteres");
-                valid = false;
-            }
-        } else {
-            MessageUtil.addMessage(AddBook.this, "Campo TÍTULO obrigatório");
-            valid = false;
-        }
-        try {
-           cbxPublisher.getSelectedItem().toString();
-        } catch (NullPointerException np) {
-            MessageUtil.addMessage(AddBook.this, "Editora obrigatória");
-            valid = false;
-        }
-        if (listAuthor.getSelectedIndices() == null) {
-            MessageUtil.addMessage(AddBook.this, "Selecione um AUTOR");
-            valid = false;
-        }
-        return valid;
     }
 
     private JScrollPane getScrollPaneAuthor() {

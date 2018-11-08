@@ -1,6 +1,7 @@
 package br.com.bookstore.model.entity;
 
 import javax.persistence.*;
+import java.security.acl.LastOwnerException;
 import java.util.List;
 
 @Entity
@@ -8,7 +9,8 @@ import java.util.List;
 public class Book {
 
     @Id
-    private Long isbn;
+    @Column(length = 13)
+    private String isbn;
 
     @Column(length = 60, nullable = false)
     private String title;
@@ -31,7 +33,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long isbn, String title, Float price, Publisher publisher, List<Author> authors) {
+    public Book(String isbn, String title, Float price, Publisher publisher, List<Author> authors) {
         this.isbn = isbn;
         this.title = title;
         this.price = price;
@@ -39,7 +41,7 @@ public class Book {
         this.authors = authors;
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
