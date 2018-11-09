@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.4.0.167" Java: "1.8.0_152-release" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -11,8 +11,8 @@ new FormModel {
 			"title": "Adicionar livro"
 			"resizable": false
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par t {seq {space :p:28:p, par l:::p {comp lblPublisher::l:p::p, comp cbxPublisher::::305:x, seq t {par l {comp lblISBN:::p::p, comp txtISBN:::p:115:p}, space ::75:x, par l {comp lblPrice:::p::p, comp txtPrice:::p:115:p}}, comp lblTitle:::p::p, comp txtTitle::l::305:x}, space :p:51:p, par l {seq {comp lblAuthor:::p::p, space :0:316:x}, comp scrollPaneAuthor::::346:x}}, seq {space :::x, comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}}, space ::28:x}}"
-				"$verticalGroup": "par l {seq l {space :p:19:p, par b {comp lblISBN::b:p::p, comp lblPrice::b:p::p, comp lblAuthor::b:p::p}, space :::p, par l:::p {seq {par l {comp txtPrice:::p::p, comp txtISBN:::p::p}, space s:::p, comp lblPublisher:::p::p, space :::p, comp cbxPublisher:::p::p, space s:::p, comp lblTitle:::p::p, space :p::p, comp txtTitle:::p::p}, comp scrollPaneAuthor:::::x}, space :p:31:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space ::32:x}}"
+				"$horizontalGroup": "par l {seq {par t {seq {space :p:28:p, par l:::p {comp lblPublisher::l:p::p, comp cbxPublisher::::305:x, comp lblTitle:::p::p, comp txtTitle::l::305:x, seq t {par l {comp lblISBN::l:p::p, comp txtISBN::l:p:115:p}, space ::90:x, par l {seq {comp label1:::p::p, space :::p, comp txtPrice:::p:81:p}, comp lblPrice:::p::p}}}, space :51:51:p, par l {seq {comp lblAuthor:::p::p, space :0:316:x}, comp scrollPaneAuthor::::346:x}}, seq {space :::x, comp btnSave:::p:80:p, space s:::p, comp btnCancel:::p::p}}, space ::28:x}}"
+				"$verticalGroup": "par l {seq l {space :p:19:p, par b {comp lblISBN::b:p::p, comp lblAuthor::b:p::p, comp lblPrice::b:p::p}, space :::p, par l:::p {seq {par l {comp txtISBN:::p::p, par b {comp label1::b:p::p, comp txtPrice::b:p::p}}, space s:::p, comp lblPublisher:::p::p, space :::p, comp cbxPublisher:::p::p, space s:::p, comp lblTitle:::p::p, space :p::p, comp txtTitle:::p::p}, comp scrollPaneAuthor:::::x}, space :p:31:p, par b {comp btnCancel::b:p::p, comp btnSave::b:p::p}, space ::30:x}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -65,6 +65,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "txtISBN"
 					addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "txtISBNKeyPressed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "R$"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

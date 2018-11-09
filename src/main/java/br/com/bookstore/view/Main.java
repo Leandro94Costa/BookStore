@@ -81,7 +81,6 @@ public class Main extends JFrame {
     }
 
     private void getScrollPane(String[][] books) {
-        bookIds = new ArrayList<>();
         scrollPanelMain.setViewportView(getTableMain(books));
     }
 
@@ -149,6 +148,7 @@ public class Main extends JFrame {
         if ((cbxSearch.getSelectedIndex() != 4 && !"".equals(txtSearch.getText())) || cbxSearch.getSelectedIndex() == 4) {
             BookController bookController = new BookController();
             try {
+                bookIds = new ArrayList<>();
                 getScrollPane(bookController.search(cbxSearch.getSelectedIndex(), txtSearch.getText(), bookIds));
             } catch (Exception e1) {
                 MessageUtil.addMessage(Main.this, e1.getMessage());
@@ -160,22 +160,33 @@ public class Main extends JFrame {
 
     private void txtSearchKeyPressed(KeyEvent e) {
         if (cbxSearch.getSelectedIndex() == 0) {
-            try {
-                if (e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_RIGHT
-                        && e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
-                    Integer.parseInt(txtSearch.getText() + e.getKeyChar());
-                }
-            } catch (NumberFormatException e1) {
-                MessageUtil.addMessage(Main.this, "Válido apenas números");
-                String text = "";
-                for (char c : txtSearch.getText().toCharArray()) {
-                    if (Character.isDigit(c)) {
-                        text += c;
+            if (txtSearch.getText().length() <= 12) {
+                try {
+                    if (e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_RIGHT
+                            && e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
+
+                        Double.parseDouble(txtSearch.getText() + e.getKeyChar());
                     }
+                } catch (NumberFormatException e1) {
+                    MessageUtil.addMessage(Main.this, "Válido apenas números");
+                    removeNonNumericChar();
                 }
-                txtSearch.setText(text);
+            } else {
+                txtSearch.setText(txtSearch.getText().substring(0, txtSearch.getText().length() - 1));
+                removeNonNumericChar();
             }
         }
+    }
+
+    private void removeNonNumericChar() {
+        String text = "";
+
+        for (char c : txtSearch.getText().toCharArray()) {
+            if (Character.isDigit(c)) {
+                text += c;
+            }
+        }
+        txtSearch.setText(text);
     }
 
     private void initComponents() {
@@ -259,6 +270,7 @@ public class Main extends JFrame {
 
             //---- buttonSearch ----
             buttonSearch.setText("Pesquisar");
+            buttonSearch.setIcon(new ImageIcon(getClass().getResource("/icons/Search16.png")));
             buttonSearch.addActionListener(e -> buttonSearchActionPerformed(e));
 
             GroupLayout panelMainLayout = new GroupLayout(panelMain);

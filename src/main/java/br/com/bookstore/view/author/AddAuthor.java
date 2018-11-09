@@ -40,6 +40,7 @@ public class AddAuthor extends JFrame {
             Integer id = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             Author author = new Author(id, txtName.getText(), txtSurname.getText());
             String validation = controller.validate(author);
+
             if (validation == null) {
                 controller.save(author);
                 MessageUtil.addMessage(AddAuthor.this, "Autor salvo com sucesso");

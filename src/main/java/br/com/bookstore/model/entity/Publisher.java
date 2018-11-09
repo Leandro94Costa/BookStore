@@ -45,36 +45,4 @@ public class Publisher {
     public String getUrl() {
         return url;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Publisher publisher = (Publisher) o;
-
-        if (!id.equals(publisher.id)) return false;
-        if (!name.equals(publisher.name)) return false;
-        if (url != null ? !url.equals(publisher.url) : publisher.url != null) return false;
-        return books != null ? books.equals(publisher.books) : publisher.books == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (books != null ? books.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", books=" + books +
-                '}';
-    }
 }

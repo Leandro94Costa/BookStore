@@ -134,7 +134,7 @@ public class BookDAO implements GenericDAO<Book, String> {
         List<Book> books;
         try {
             books = entityManager.createQuery("select b from Book b where b.isbn like :isbn")
-                    .setParameter("isbn", isbn)
+                    .setParameter("isbn",isbn + "%")
                     .getResultList();
         } catch (Exception e) {
             throw new Exception(e.getMessage());

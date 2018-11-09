@@ -43,6 +43,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonSearch"
 					"text": "Pesquisar"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/Search16.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSearchActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {

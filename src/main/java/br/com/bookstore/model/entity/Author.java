@@ -45,36 +45,4 @@ public class Author {
     public String getFirstName() {
         return firstName;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Author author = (Author) o;
-
-        if (!id.equals(author.id)) return false;
-        if (!name.equals(author.name)) return false;
-        if (!firstName.equals(author.firstName)) return false;
-        return books != null ? books.equals(author.books) : author.books == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + (books != null ? books.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", books=" + books +
-                '}';
-    }
 }

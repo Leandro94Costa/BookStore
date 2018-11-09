@@ -50,7 +50,6 @@ public class ListPublisher extends JFrame {
     }
 
     private void getScrollPanelPublisher(String[][] publishers) {
-        publisherIds = new ArrayList<>();
         scrollPanelPublisher.setViewportView(getTablePublisher(publishers));
     }
 
@@ -130,6 +129,7 @@ public class ListPublisher extends JFrame {
         if (!"".equals(txtSearch.getText())) {
             PublisherController publisherController = new PublisherController();
             try {
+                publisherIds = new ArrayList<>();
                 getScrollPanelPublisher(publisherController.search(txtSearch.getText(), publisherIds));
             } catch (Exception e1) {
                 MessageUtil.addMessage(ListPublisher.this, e1.getMessage());
@@ -141,7 +141,7 @@ public class ListPublisher extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelPublisher = new JPanel();
         scrollPanelPublisher = new JScrollPane();
         tablePublisher = new JTable();
@@ -191,6 +191,7 @@ public class ListPublisher extends JFrame {
 
             //---- buttonSearch ----
             buttonSearch.setText("Pesquisar");
+            buttonSearch.setIcon(new ImageIcon(getClass().getResource("/icons/Search16.png")));
             buttonSearch.addActionListener(e -> buttonSearchActionPerformed(e));
 
             GroupLayout panelPublisherLayout = new GroupLayout(panelPublisher);
@@ -243,7 +244,7 @@ public class ListPublisher extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelPublisher;
     private JScrollPane scrollPanelPublisher;
     private JTable tablePublisher;

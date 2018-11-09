@@ -50,7 +50,6 @@ public class ListAuthor extends JFrame {
     }
 
     private void getScrollPanelAuthor(String[][] authors) {
-        authorIds = new ArrayList<>();
         scrollPanelAuthor.setViewportView(getTableAuthor(authors));
     }
 
@@ -130,6 +129,7 @@ public class ListAuthor extends JFrame {
         if (!"".equals(txtSearch.getText())) {
             AuthorController authorController = new AuthorController();
             try {
+                authorIds = new ArrayList<>();
                 getScrollPanelAuthor(authorController.search(txtSearch.getText(), authorIds));
             } catch (Exception e1) {
                 MessageUtil.addMessage(ListAuthor.this, e1.getMessage());
@@ -141,7 +141,7 @@ public class ListAuthor extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro
+        // Generated using JFormDesigner Evaluation license - Leandro Costa
         panelAuthor = new JPanel();
         scrollPanelAuthor = new JScrollPane();
         tableAuthor = new JTable();
@@ -188,6 +188,7 @@ public class ListAuthor extends JFrame {
 
             //---- buttonSearch ----
             buttonSearch.setText("Pesquisar");
+            buttonSearch.setIcon(new ImageIcon(getClass().getResource("/icons/Search16.png")));
             buttonSearch.addActionListener(e -> buttonSearchActionPerformed(e));
 
             GroupLayout panelAuthorLayout = new GroupLayout(panelAuthor);
@@ -244,7 +245,7 @@ public class ListAuthor extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro
+    // Generated using JFormDesigner Evaluation license - Leandro Costa
     private JPanel panelAuthor;
     private JScrollPane scrollPanelAuthor;
     private JTable tableAuthor;

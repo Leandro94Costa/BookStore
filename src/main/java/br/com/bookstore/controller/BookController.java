@@ -4,11 +4,13 @@ import br.com.bookstore.model.dao.BookDAO;
 import br.com.bookstore.model.entity.Author;
 import br.com.bookstore.model.entity.Book;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BookController {
 
     private BookDAO dao = new BookDAO();
+    private DecimalFormat decimal = new DecimalFormat("0.00");
 
     public String[][] getAll(List<String> bookIds) throws Exception {
         return fillBooks(dao.getAll(), bookIds);
@@ -23,7 +25,7 @@ public class BookController {
             bookIds.add(book.getIsbn());
             books[i][0] = book.getIsbn();
             books[i][1] = book.getTitle();
-            books[i][2] = book.getPrice().toString();
+            books[i][2] = "R$" + " " + decimal.format(book.getPrice()).replace(".", ",");
             books[i][3] = getAuthors(book);
             books[i][4] = book.getPublisher().getName();
             books[i][5] = "Editar";
@@ -116,8 +118,10 @@ public class BookController {
             validation = "Campo TÍTULO deve ter até 60 caracteres";
         }
 
-        if (book.getPrice() <= 0 || book.getPrice() > 9999999.99) {
-            validation = "Campo PREÇO deve ser entre 0,01 e 9999999,99";
+        if (book.getPrice() <= 0) {
+            validation = "Campo PREÇO deve ser maior que zero";
+        } else if (book.getPrice() > 9999999.99) {
+            validation = "Campo PREÇO deve ser menor que 9999999,99";
         }
 
         if (book.getPublisher() == null) {
