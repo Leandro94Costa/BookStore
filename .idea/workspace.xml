@@ -3,20 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="caba2b33-7601-4731-8a99-405e9cf83dfe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/AuthorController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/AuthorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/BookController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/BookController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/PublisherController.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/controller/PublisherController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/model/dao/BookDAO.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/model/dao/BookDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/model/entity/Author.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/model/entity/Author.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/author/ListAuthor.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/author/ListAuthor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.jfd" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.jfd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/AddPublisher.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/AddPublisher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/ListPublisher.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/ListPublisher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/currency.properties" afterPath="$PROJECT_DIR$/src/main/resources/currency.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -88,27 +74,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ListPublisher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/ListPublisher.java">
+      <file leaf-file-name="AddBook.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="53" column="76" lean-forward="false" selection-start-line="53" selection-start-column="76" selection-end-line="53" selection-end-column="76" />
+            <state relative-caret-position="2358">
+              <caret line="152" column="106" lean-forward="true" selection-start-line="152" selection-start-column="106" selection-end-line="152" selection-end-column="106" />
               <folding>
-                <marker date="1541724535751" expanded="true" signature="5976:11301" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1541724535751" expanded="false" signature="11313:11781" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2196">
-              <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
-              <folding>
-                <marker date="1541724535555" expanded="true" signature="6609:13351" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-                <marker date="1541724535555" expanded="false" signature="13363:13964" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+                <marker date="1541724535810" expanded="true" signature="5868:14165" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1541724535810" expanded="false" signature="14177:14846" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
               </folding>
             </state>
           </provider>
@@ -193,9 +166,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/AddPublisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/author/ListAuthor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/ListPublisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java" />
       </list>
     </option>
   </component>
@@ -804,7 +777,7 @@
       <workItem from="1541515465547" duration="10446000" />
       <workItem from="1541533094500" duration="847000" />
       <workItem from="1541552931797" duration="2845000" />
-      <workItem from="1541719197966" duration="5138000" />
+      <workItem from="1541719197966" duration="5261000" />
     </task>
     <task id="LOCAL-00001" summary="Designed views and created actions to save an author from the form.">
       <created>1538792754720</created>
@@ -876,11 +849,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541555281158</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Improvements in MVC.">
+      <created>1541724564988</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1541724564988</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106018000" />
+    <option name="totallyTimeSpent" value="106141000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -893,7 +873,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -916,7 +895,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15260416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15260416" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1193,19 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="146" column="9" lean-forward="false" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
-          <folding>
-            <element signature="e#4249#4250#0" expanded="true" />
-            <element signature="e#4314#4315#0" expanded="true" />
-            <marker date="1541724535810" expanded="true" signature="5868:14165" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1541724535810" expanded="false" signature="14177:14846" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/publisher/AddPublisher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1213,6 +1179,17 @@
           <folding>
             <marker date="1541720461059" expanded="true" signature="1794:5360" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
             <marker date="1541720461059" expanded="false" signature="5372:5800" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
+          <folding>
+            <marker date="1541724535555" expanded="true" signature="6609:13351" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1541724535555" expanded="false" signature="13363:13964" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -1228,13 +1205,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/bookstore/view/book/AddBook.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2196">
-          <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
+        <state relative-caret-position="2358">
+          <caret line="152" column="106" lean-forward="true" selection-start-line="152" selection-start-column="106" selection-end-line="152" selection-end-column="106" />
           <folding>
-            <marker date="1541724535555" expanded="true" signature="6609:13351" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1541724535555" expanded="false" signature="13363:13964" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1541724535810" expanded="true" signature="5868:14165" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1541724535810" expanded="false" signature="14177:14846" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
