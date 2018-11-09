@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class PublisherController {
 
-    PublisherDAO dao = new PublisherDAO();
+    private PublisherDAO dao = new PublisherDAO();
 
     public String[][] getAll(List<Integer> publisherIds) throws Exception {
         return fillPublisher(dao.getAll(), publisherIds);
@@ -17,6 +17,7 @@ public class PublisherController {
     private String[][] fillPublisher(List<Publisher> publisherList, List<Integer> publisherIds) throws Exception {
         int numColumns = 4;
         String[][] publishers = new String[publisherList.size()][numColumns];
+
         for (int i = 0; i < publisherList.size(); i++) {
             Publisher publisher = publisherList.get(i);
             publisherIds.add(publisher.getId());
@@ -31,6 +32,7 @@ public class PublisherController {
     public String[] getNames(Map<Integer, Integer> publisherIds) throws Exception {
         List<Publisher> publishers = dao.getAll();
         String[] names = new String[publishers.size()];
+
         for (int i = 0; i < publishers.size(); i++) {
             Publisher publisher = publishers.get(i);
             publisherIds.put(i, publisher.getId());
@@ -61,5 +63,20 @@ public class PublisherController {
 
     public String[][] search(String name, List<Integer> publisherIds) throws Exception {
         return fillPublisher(dao.findByName(name), publisherIds);
+    }
+
+    public String validate(Publisher publisher) {
+        String validation = null;
+
+        if ("".equals(publisher.getName())) {
+            validation = "Campo NOME obrigatório";
+        } else if (publisher.getName().length() > 30) {
+            validation = "Campo NOME deve conter até 30 caracteres";
+        }
+
+        if (publisher.getUrl() != null && publisher.getUrl().length() > 80) {
+            validation = "Campo URL deve conter até 80 caracteres";
+        }
+        return validation;
     }
 }

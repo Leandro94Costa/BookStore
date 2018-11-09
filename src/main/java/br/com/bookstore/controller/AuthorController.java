@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class AuthorController {
 
-    AuthorDAO dao = new AuthorDAO();
+    private AuthorDAO dao = new AuthorDAO();
 
     public String[][] getAll(List<Integer> authorIds) throws Exception {
         return fillAuthor(dao.getAll(), authorIds);
@@ -18,6 +18,7 @@ public class AuthorController {
     private String[][] fillAuthor(List<Author> authorList, List<Integer> authorIds) throws Exception {
         int numColumns = 4;
         String[][] authors = new String[authorList.size()][numColumns];
+
         for (int i = 0; i < authorList.size(); i++) {
             Author author = authorList.get(i);
             authorIds.add(author.getId());
@@ -32,6 +33,7 @@ public class AuthorController {
     public String[] getNames(Map<Integer, Integer> authorIds) throws Exception {
         List<Author> authors = dao.getAll();
         String[] names = new String[authors.size()];
+
         for (int i = 0; i < authors.size(); i++) {
             Author author = authors.get(i);
             authorIds.put(i, author.getId());
@@ -42,6 +44,7 @@ public class AuthorController {
 
     public List<Author> getAuthorsById(List<Integer> authorIds) throws Exception {
         List<Author> authors = new ArrayList<>();
+
         for (Integer id : authorIds) {
             authors.add(getById(id));
         }
@@ -74,11 +77,13 @@ public class AuthorController {
 
     public String validate(Author author) {
         String validation = null;
+
         if ("".equals(author.getFirstName())) {
             validation = "Campo NOME obrigatório";
         } else if (author.getFirstName().length() > 25) {
             validation = "Campo NOME deve conter até 25 caracteres";
         }
+
         if ("".equals(author.getName())) {
             validation = "Campo SOBRENOME obrigatório";
         } else if (author.getName().length() > 25) {

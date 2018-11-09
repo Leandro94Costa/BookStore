@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BookController {
 
-    BookDAO dao = new BookDAO();
+    private BookDAO dao = new BookDAO();
 
     public String[][] getAll(List<String> bookIds) throws Exception {
         return fillBooks(dao.getAll(), bookIds);
@@ -17,10 +17,11 @@ public class BookController {
     private String[][] fillBooks(List<Book> bookList, List<String> bookIds) throws Exception {
         int numColumns = 7;
         String[][] books = new String[bookList.size()][numColumns];
+
         for (int i = 0; i < bookList.size(); i++) {
             Book book = bookList.get(i);
             bookIds.add(book.getIsbn());
-            books[i][0] = book.getIsbn().toString();
+            books[i][0] = book.getIsbn();
             books[i][1] = book.getTitle();
             books[i][2] = book.getPrice().toString();
             books[i][3] = getAuthors(book);
@@ -36,6 +37,7 @@ public class BookController {
         List<Author> authors = authorController.getAuthorsByBook(book.getIsbn());
         String authorsConcat = "";
         int count = 1;
+
         for (Author author : authors) {
             authorsConcat += count != authors.size() ? author.getFirstName() + " " + author.getName() + ", "
                     : author.getFirstName() + " " + author.getName();
@@ -84,7 +86,7 @@ public class BookController {
     }
 
     private String[][] searchByISBN(String search, List<String> bookIds) throws Exception {
-        return fillBooks(dao.findByISBN(Long.valueOf(search)), bookIds);
+        return fillBooks(dao.findByISBN(search), bookIds);
     }
 
     private String[][] searchByTitle(String search, List<String> bookIds) throws Exception {
@@ -114,9 +116,7 @@ public class BookController {
             validation = "Campo TÍTULO deve ter até 60 caracteres";
         }
 
-        if ("".equals(book.getPrice())) {
-            validation = "Campo PREÇO obrigatório";
-        } else if (book.getPrice() <= 0 || book.getPrice() > 9999999.99) {
+        if (book.getPrice() <= 0 || book.getPrice() > 9999999.99) {
             validation = "Campo PREÇO deve ser entre 0,01 e 9999999,99";
         }
 
@@ -126,7 +126,6 @@ public class BookController {
         if (book.getAuthors() == null) {
             validation = "Autor obrigatória";
         }
-
         return validation;
     }
 }

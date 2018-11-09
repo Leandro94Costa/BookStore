@@ -44,16 +44,14 @@ public class ListAuthor extends JFrame {
         getScrollPanelAuthor();
     }
 
-    private JScrollPane getScrollPanelAuthor() {
+    private void getScrollPanelAuthor() {
         authorIds = new ArrayList<>();
         scrollPanelAuthor.setViewportView(getTableAuthor(null));
-        return scrollPanelAuthor;
     }
 
-    private JScrollPane getScrollPanelAuthor(String[][] authors) {
+    private void getScrollPanelAuthor(String[][] authors) {
         authorIds = new ArrayList<>();
         scrollPanelAuthor.setViewportView(getTableAuthor(authors));
-        return scrollPanelAuthor;
     }
 
     private JTable getTableAuthor(String[][] authors) {

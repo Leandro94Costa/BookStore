@@ -30,12 +30,6 @@ public class Author {
         this.name = name;
     }
 
-    public Author(String firstName, String name, List<Book> books) {
-        this.firstName = firstName;
-        this.name = name;
-        this.books = books;
-    }
-
     public Integer getId() {
         return id;
     }

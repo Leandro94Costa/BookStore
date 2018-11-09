@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
- * @author Leandro
+ * @author Leandro Costa
  */
 public class AddPublisher extends JFrame {
 
@@ -35,27 +35,23 @@ public class AddPublisher extends JFrame {
     }
 
     private void btnSaveActionPerformed(ActionEvent e) {
-        if (!"".equals(txtName.getText()) && txtName.getText().length() <= 30 && txtURL.getText().length() <= 80) {
+        PublisherController publisherController = new PublisherController();
+        try {
             Integer idPublisher = !"".equals(txtId.getText()) ? Integer.parseInt(txtId.getText()) : null;
             String urlPublisher = !"".equals(txtURL.getText()) ? txtURL.getText() : null;
+
             Publisher publisher = new Publisher(idPublisher, txtName.getText(), urlPublisher);
-            PublisherController publisherController = new PublisherController();
-            try {
+            String validation = publisherController.validate(publisher);
+
+            if (validation == null) {
                 publisherController.save(publisher);
                 MessageUtil.addMessage(AddPublisher.this, "Editora salva com sucesso");
                 dispose();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                MessageUtil.addMessage(AddPublisher.this, e1.getMessage());
-            }
-        } else {
-            if ("".equals(txtName.getText())) {
-                MessageUtil.addMessage(AddPublisher.this, "Campo NOME obrigatório");
-            } else if (txtName.getText().length() > 30) {
-                MessageUtil.addMessage(AddPublisher.this, "Campo NOME deve conter até 30 caracteres");
             } else {
-                MessageUtil.addMessage(AddPublisher.this, "Campo URL deve conter até 80 caracteres");
+                MessageUtil.addMessage(AddPublisher.this, validation);
             }
+        } catch (Exception e1) {
+            MessageUtil.addMessage(AddPublisher.this, e1.getMessage());
         }
     }
 

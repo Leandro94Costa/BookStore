@@ -129,11 +129,11 @@ public class BookDAO implements GenericDAO<Book, String> {
         }
     }
 
-    public List<Book> findByISBN(Long isbn) throws Exception {
+    public List<Book> findByISBN(String isbn) throws Exception {
         EntityManager entityManager = JpaUtil.getEntityManager();
         List<Book> books;
         try {
-            books = entityManager.createQuery("select b from Book b where b.isbn = :isbn")
+            books = entityManager.createQuery("select b from Book b where b.isbn like :isbn")
                     .setParameter("isbn", isbn)
                     .getResultList();
         } catch (Exception e) {

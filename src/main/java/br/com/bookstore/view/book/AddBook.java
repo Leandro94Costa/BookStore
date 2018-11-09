@@ -46,11 +46,11 @@ public class AddBook extends JFrame {
         txtISBN.setText(ISBN);
         txtTitle.setText(title);
         txtPrice.setText(price);
-        cbxPublisher.setSelectedIndex(setPublisherComboBox(publisherId));
-        listAuthor.setSelectedIndices(setAuthorList(authors));
+        cbxPublisher.setSelectedIndex(getIndexPublisherComboBox(publisherId));
+        listAuthor.setSelectedIndices(getIndexAuthorList(authors));
     }
 
-    private int[] setAuthorList(List<Author> authors) {
+    private int[] getIndexAuthorList(List<Author> authors) {
         List<Integer> listIndex = new ArrayList<>();
         for (Author author : authors) {
             for (int i = 0; i < authorIds.size(); i++) {
@@ -68,7 +68,7 @@ public class AddBook extends JFrame {
         return index;
     }
 
-    private Integer setPublisherComboBox(Integer id) {
+    private Integer getIndexPublisherComboBox(Integer id) {
         Integer index = 0;
         for (int i = 0; i < publisherIds.size(); i++) {
             if (publisherIds.get(i) == id) {
@@ -122,9 +122,8 @@ public class AddBook extends JFrame {
         return ids;
     }
 
-    private JScrollPane getScrollPaneAuthor() {
+    private void getScrollPaneAuthor() {
         scrollPaneAuthor.setViewportView(getListAuthor());
-        return scrollPaneAuthor;
     }
 
     private JList getListAuthor() {
@@ -133,22 +132,19 @@ public class AddBook extends JFrame {
             String[] names = authorController.getNames(authorIds);
             listAuthor = new JList(names);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtil.addMessage(AddBook.this, e.getMessage());
         }
         return listAuthor;
     }
 
-    private JComboBox getCbxPublisher() {
+    private void getCbxPublisher() {
         PublisherController publisherController = new PublisherController();
         try {
             ComboBoxModel comboBoxModelPublisher = new DefaultComboBoxModel(publisherController.getNames(publisherIds));
             cbxPublisher.setModel(comboBoxModelPublisher);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtil.addMessage(AddBook.this, e.getMessage());
         }
-        return cbxPublisher;
     }
 
     private void txtISBNKeyPressed(KeyEvent e) {
@@ -171,7 +167,7 @@ public class AddBook extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Leandro Costa
+        // Generated using JFormDesigner Evaluation license - Leandro
         panel1 = new JPanel();
         lblISBN = new JLabel();
         lblTitle = new JLabel();
@@ -194,6 +190,15 @@ public class AddBook extends JFrame {
 
         //======== panel1 ========
         {
+
+            // JFormDesigner evaluation mark
+            panel1.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                    "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                    javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                    java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+
             //---- lblISBN ----
             lblISBN.setText("ISBN");
 
@@ -224,6 +229,7 @@ public class AddBook extends JFrame {
 
             //---- txtPrice ----
             txtPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+            txtPrice.setText("0.00");
 
             //---- txtISBN ----
             txtISBN.addKeyListener(new KeyAdapter() {
@@ -294,7 +300,7 @@ public class AddBook extends JFrame {
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancel)
                             .addComponent(btnSave))
-                        .addContainerGap(30, Short.MAX_VALUE))
+                        .addContainerGap(32, Short.MAX_VALUE))
             );
         }
 
@@ -314,7 +320,7 @@ public class AddBook extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Leandro Costa
+    // Generated using JFormDesigner Evaluation license - Leandro
     private JPanel panel1;
     private JLabel lblISBN;
     private JLabel lblTitle;

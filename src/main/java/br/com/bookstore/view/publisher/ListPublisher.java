@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
- * @author Leandro
+ * @author Leandro Costa
  */
 public class ListPublisher extends JFrame {
 
@@ -44,16 +44,14 @@ public class ListPublisher extends JFrame {
         getScrollPanelPublisher();
     }
 
-    private JScrollPane getScrollPanelPublisher() {
+    private void getScrollPanelPublisher() {
         publisherIds = new ArrayList<>();
         scrollPanelPublisher.setViewportView(getTablePublisher(null));
-        return scrollPanelPublisher;
     }
 
-    private JScrollPane getScrollPanelPublisher(String[][] publishers) {
+    private void getScrollPanelPublisher(String[][] publishers) {
         publisherIds = new ArrayList<>();
         scrollPanelPublisher.setViewportView(getTablePublisher(publishers));
-        return scrollPanelPublisher;
     }
 
     private JTable getTablePublisher(String[][] publishers) {

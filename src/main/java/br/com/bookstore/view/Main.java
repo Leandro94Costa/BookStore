@@ -75,16 +75,14 @@ public class Main extends JFrame {
         getScrollPane();
     }
 
-    private JScrollPane getScrollPane() {
-        bookIds = new ArrayList<String>();
+    private void getScrollPane() {
+        bookIds = new ArrayList<>();
         scrollPanelMain.setViewportView(getTableMain(null));
-        return scrollPanelMain;
     }
 
-    private JScrollPane getScrollPane(String[][] books) {
-        bookIds = new ArrayList<String>();
+    private void getScrollPane(String[][] books) {
+        bookIds = new ArrayList<>();
         scrollPanelMain.setViewportView(getTableMain(books));
-        return scrollPanelMain;
     }
 
     private JTable getTableMain(String[][] books) {
@@ -141,7 +139,7 @@ public class Main extends JFrame {
     }
 
     private void editBook(Book book) {
-        AddBook addBook = new AddBook(book.getIsbn().toString(), book.getTitle().toString(), book.getPrice().toString(),
+        AddBook addBook = new AddBook(book.getIsbn(), book.getTitle(), book.getPrice().toString(),
                 book.getPublisher().getId(), book.getAuthors());
         addBook.setLocationRelativeTo(null);
         addBook.setVisible(true);
